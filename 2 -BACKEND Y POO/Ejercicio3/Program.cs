@@ -9,17 +9,21 @@ namespace Ejercicio3
     {
         static void Main(string[] args)
         {
-
-            // Mostrar todos los usuarios
             var daoUsuarios = new bdconnection.DAOs.DAOUsuarios();
+            
+            //Crear Usuario
+            
+            daoUsuarios.CreateUser(109, "Pablo", 32);
 
+            // Mostrar todos los usuarios activos
+          
             var usuarios = daoUsuarios.GetAllUsers();
             Console.WriteLine("Lista de Usuarios:");
             foreach (var usuario in usuarios)
             {
                 Console.WriteLine($"Id: {usuario.Id}, Nombre: {usuario.Nombre}, Edad: {usuario.Edad}");
             }
-            // Buscar y mostrar un usuario por Id
+            // Buscar y mostrar un usuario activo por Edad 
             Console.WriteLine("\n Buscar usuario por Edad:");
             int edad = 35;
 
@@ -32,6 +36,14 @@ namespace Ejercicio3
             {
                 Console.WriteLine($"No se encontró usuario con {edad} años");
             }
+
+           // Actualizar un usuario por ID
+
+            daoUsuarios.UpdateUserByID(104, "Marcos", 31, false);
+
+           //Eliminar de manera logica un usuario por ID
+
+            daoUsuarios.DeleteUserByID(104);
         }
     }
 }

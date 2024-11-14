@@ -1,12 +1,54 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8CC62031-1233-40D7-AAF2-1F25E5196D5C}|Ejercicio3\\Ejercicio3.csproj|c:\\users\\usuario\\joaco\\programing\\bootcamp extrados\\2 -backend y poo\\ejercicio3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CC62031-1233-40D7-AAF2-1F25E5196D5C}|Ejercicio3\\Ejercicio3.csproj|solutionrelative:ejercicio3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CC62031-1233-40D7-AAF2-1F25E5196D5C}|Ejercicio3\\Ejercicio3.csproj|c:\\users\\usuario\\joaco\\programing\\bootcamp extrados\\2 -backend y poo\\ejercicio3\\bdconnection\\daos\\daousuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CC62031-1233-40D7-AAF2-1F25E5196D5C}|Ejercicio3\\Ejercicio3.csproj|solutionrelative:ejercicio3\\bdconnection\\daos\\daousuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Ejercicio3\\Program.cs",
+              "RelativeDocumentMoniker": "Ejercicio3\\Program.cs",
+              "ToolTip": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Ejercicio3\\Program.cs*",
+              "RelativeToolTip": "Ejercicio3\\Program.cs*",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T21:28:44.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DAOUsuarios.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Ejercicio3\\bdconnection\\DAOs\\DAOUsuarios.cs",
+              "RelativeDocumentMoniker": "Ejercicio3\\bdconnection\\DAOs\\DAOUsuarios.cs",
+              "ToolTip": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Ejercicio3\\bdconnection\\DAOs\\DAOUsuarios.cs*",
+              "RelativeToolTip": "Ejercicio3\\bdconnection\\DAOs\\DAOUsuarios.cs*",
+              "ViewState": "AgIAABgAAAAAAAAAAAAuwCYAAABaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T20:36:48.775Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

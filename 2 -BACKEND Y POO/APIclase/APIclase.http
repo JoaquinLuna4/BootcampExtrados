@@ -1,0 +1,6 @@
+@APIclase_HostAddress = http://localhost:3000
+
+GET {{APIclase_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

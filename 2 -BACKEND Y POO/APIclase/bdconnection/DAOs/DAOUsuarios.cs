@@ -28,16 +28,23 @@ namespace APIclase.bdconnection.DAOs
             return connection.QueryFirstOrDefault<Usuarios>(query, new { email });
         }
         /*METODOS CREATE / UPDATE */
-        public void CreateUser(int id, string nombre, string email)
+        //public void CreateUser(int id, string nombre, string email)
+        //{
+        //    using var connection = new MySqlConnection(conn);
+        //    string query = "INSERT INTO Usuarios VALUE (@id, @nombre, @email)";
+        //    connection.Execute(query, new { id, nombre, email });
+        //}
+
+        public int CreateUser(int id, string nombre, string email, int edad)
         {
             using var connection = new MySqlConnection(conn);
-            string query = "INSERT INTO Usuarios VALUE (@id, @nombre, @email)";
-            connection.Execute(query, new { id, nombre, email });
+            string query = "INSERT INTO Usuarios (Id, Nombre, Email, edad) VALUES (@id, @nombre, @email, @edad); SELECT LAST_INSERT_ID();";
+            return connection.ExecuteScalar<int>(query, new { id, nombre, email, edad });
         }
-        public void UpdateUserByID(int id, string nombre, int email)
+        public void UpdateUserByID(int id, string nombre, int email,int edad)
         {
             using var connection = new MySqlConnection(conn);
-            string query = "UPDATE Usuarios SET Nombre = @nombre, Email=@email WHERE id=@id ";
+            string query = "UPDATE Usuarios SET Nombre = @nombre, Email=@email, Edad=@edad WHERE id=@id ";
             connection.Execute(query, new { id, nombre, email });
 
         }

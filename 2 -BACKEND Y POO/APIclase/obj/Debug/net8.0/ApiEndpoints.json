@@ -21,7 +21,7 @@
   },
   {
     "ContainingType": "APIclase.Controllers.UsuarioController",
-    "Method": "ObtenerUsuario",
+    "Method": "ObtenerUsuarioConEmail",
     "RelativePath": "api/Usuario/{email}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -30,6 +30,47 @@
       {
         "Name": "email",
         "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "APIclase.bdconnection.Entidades.Usuarios",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "APIclase.Controllers.UsuarioController",
+    "Method": "CrearUsuario",
+    "RelativePath": "api/Usuario/{id}/{nombre}/{email}/{edad}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "nombre",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "edad",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

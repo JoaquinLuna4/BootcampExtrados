@@ -153,6 +153,20 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "datos/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Dapper": "2.1.35",
+          "MySqlConnector": "2.4.0"
+        },
+        "compile": {
+          "bin/placeholder/datos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/datos.dll": {}
+        }
       }
     }
   },
@@ -659,13 +673,19 @@
         "swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "datos/1.0.0": {
+      "type": "project",
+      "path": "../datos/datos.csproj",
+      "msbuildProject": "../datos/datos.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Dapper >= 2.1.35",
       "MySqlConnector >= 2.4.0",
-      "Swashbuckle.AspNetCore >= 6.6.2"
+      "Swashbuckle.AspNetCore >= 6.6.2",
+      "datos >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -695,7 +715,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\datos\\datos.csproj": {
+              "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\datos\\datos.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

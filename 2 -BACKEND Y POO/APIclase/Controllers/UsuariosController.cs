@@ -1,33 +1,44 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using APIclase.bdconnection.Entidades;
-using APIclase.bdconnection.DAOs;
+using datos.Entidades;
+using datos.DAOs;
 using MySqlConnector;
 using Dapper;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Text.RegularExpressions;
+using APIclase.Servicios;
+
 
 
 namespace APIclase.Controllers
 {
+     
+
     [ApiController]
     [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
     {
+        private UsuariosServices _servicioUsuario
+        {
+            get; set;
+        }
+        public UsuarioController()
+        {
+            _servicioUsuario = new UsuariosServices();
+        }
+
+
         [HttpGet]
         public IEnumerable<Usuarios> ObtenerUsuarios()
         {
-            var daoUsuarios = new bdconnection.DAOs.DAOUsuarios();
-            var usuarios = daoUsuarios.GetAllUsers();
-
+            var usuarios = _servicioUsuario.ObtenerUsuarios();
             return usuarios;
         }
         [HttpGet("{email}")]
         public Usuarios ObtenerUsuarioConEmail(string email)
-        {
-            var daoUsuarios = new bdconnection.DAOs.DAOUsuarios();
-            var usuario = daoUsuarios.GetUserByEmail(email);
-            if (usuario == null) throw new Exception();
-            return usuario;
+        { 
+            var user = _servicioUsuario.ObtenerUsuarioConEmail(email);
+            if (user == null) throw new Exception();
+            return user;
         }
 
         [HttpPost("{id}/{nombre}/{email}/{edad}")]
@@ -35,10 +46,10 @@ namespace APIclase.Controllers
         {
 
            if(email.Contains("@gmail.com", StringComparison.OrdinalIgnoreCase) && edad>=14){
-            var daoUsuarios = new bdconnection.DAOs.DAOUsuarios();
-            int nuevoId = daoUsuarios.CreateUser(id, nombre, email, edad);
-            // Aquí puedes obtener el usuario creado desde la base de datos usando el nuevo ID
-            var usuarioCreado = daoUsuarios.GetUserByEmail(email);
+
+            var user = _servicioUsuario.CrearUsuario(id, nombre, email, edad);
+            // obtener el usuario creado desde la base de datos usando el nuevo ID
+            var usuarioCreado = _servicioUsuario.ObtenerUsuarioConEmail(email);
                 // Verificar si el usuario creado es nulo antes de devolverlo
 
             if (usuarioCreado == null)

@@ -1,4 +1,4 @@
-using APIclase.bdconnection.Entidades;
+using datos.Entidades;
 using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);

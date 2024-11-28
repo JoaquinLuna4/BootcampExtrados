@@ -9,7 +9,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[APIclase.bdconnection.Entidades.Usuarios, APIclase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[datos.Entidades.Usuarios, datos, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -35,7 +35,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "APIclase.bdconnection.Entidades.Usuarios",
+        "Type": "datos.Entidades.Usuarios",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -76,7 +76,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "APIclase.bdconnection.Entidades.Usuarios",
+        "Type": "datos.Entidades.Usuarios",
         "MediaTypes": [
           "text/plain",
           "application/json",

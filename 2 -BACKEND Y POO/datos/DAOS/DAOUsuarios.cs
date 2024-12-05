@@ -11,6 +11,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace datos.DAOs
 {
+    //Esto referencia a el ejercicio de APIClase
     public class DAOUsuarios
     {
         public string conn = "Server = 127.0.0.1 ; Database = ejerciciobackend; UId = root; Password = 030419Fl; Allow User Variables=true;";
@@ -28,13 +29,7 @@ namespace datos.DAOs
             return connection.QueryFirstOrDefault<Usuarios>(query, new { email });
         }
         /*METODOS CREATE / UPDATE */
-        //public void CreateUser(int id, string nombre, string email)
-        //{
-        //    using var connection = new MySqlConnection(conn);
-        //    string query = "INSERT INTO Usuarios VALUE (@id, @nombre, @email)";
-        //    connection.Execute(query, new { id, nombre, email });
-        //}
-
+        
         public Usuarios CreateUser(int id, string nombre, string email, int edad)
         {
             using var connection = new MySqlConnection(conn);

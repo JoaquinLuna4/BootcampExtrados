@@ -76,7 +76,7 @@
   {
     "ContainingType": "APIAutorizacionAutenticacion.Controllers.AuthController",
     "Method": "profiles",
-    "RelativePath": "Auth/profiles/${nombre}",
+    "RelativePath": "Auth/profiles/{nombre}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -116,26 +116,6 @@
     "ReturnTypes": [
       {
         "Type": "datos.Entidades.UsuariosCRUD",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "APIAutorizacionAutenticacion.Controllers.AuthController",
-    "Method": "GetTest",
-    "RelativePath": "Auth/testauth",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.String",
         "MediaTypes": [
           "text/plain",
           "application/json",

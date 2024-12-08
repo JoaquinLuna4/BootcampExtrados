@@ -1,9 +1,14 @@
+using Configuracion;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+//DI
+builder.Services.Configure<JWTConfig>(builder.Configuration.GetSection("JWT"));
 
 // Add services to the container.
 

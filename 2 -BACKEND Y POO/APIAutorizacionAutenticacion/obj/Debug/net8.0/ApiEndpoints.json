@@ -75,7 +75,7 @@
   },
   {
     "ContainingType": "APIAutorizacionAutenticacion.Controllers.AuthController",
-    "Method": "profiles",
+    "Method": "Profiles",
     "RelativePath": "Auth/profiles/{nombre}",
     "HttpMethod": "GET",
     "IsController": true,

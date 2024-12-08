@@ -1,7 +1,9 @@
 using APIAutorizacionAutenticacion.Services;
+using Configuracion;
 using datos.Entidades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -14,14 +16,16 @@ namespace APIAutorizacionAutenticacion.Controllers
     public class AuthController : ControllerBase
     {
         private AuthService _CRUDService { get; set; }
-        public AuthController()
+        private JWTConfig _jwtConfiguracion;
+        public AuthController(IOptions<JWTConfig> JwtConfigu)
         {
             _CRUDService = new AuthService();
+            _jwtConfiguracion = JwtConfigu.Value;
         }
 
         [HttpPost ("JWT")]
         public string Login() {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secret_secret_secret_secret_secret"));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfiguracion.Secret));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new List<Claim>
             {
@@ -29,8 +33,8 @@ namespace APIAutorizacionAutenticacion.Controllers
                 new Claim(ClaimTypes.Name, "JOACO")
             };
             var Sectoken = new JwtSecurityToken(
-                "localhost",
-                "localhost",
+                _jwtConfiguracion.Issuer,
+                _jwtConfiguracion.Audience,
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(120),
                 signingCredentials: credentials);
@@ -88,7 +92,7 @@ namespace APIAutorizacionAutenticacion.Controllers
         [HttpGet("profiles/{nombre}")]
         [Authorize]
         //Este endpoint deja ver a todos los usuarios que sepamos siempre y cuando estemos autorizados
-        public UsuariosCRUD profiles(string nombre)
+        public UsuariosCRUD Profiles(string nombre)
         {
             var usuario = _CRUDService.ObtenerUsuarioPublico(nombre);
             return usuario;

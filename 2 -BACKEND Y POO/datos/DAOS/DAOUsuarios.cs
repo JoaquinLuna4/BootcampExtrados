@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using datos.Entidades;
 using Dapper;
 using MySqlConnector;
-using System.Reflection.Metadata.Ecma335;
+
 
 
 namespace datos.DAOs

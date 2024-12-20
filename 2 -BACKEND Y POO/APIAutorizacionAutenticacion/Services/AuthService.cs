@@ -8,42 +8,43 @@ namespace APIAutorizacionAutenticacion.Services
 {
     public class AuthService
     {
-        private DAOCRUD Objeto1 { get; set; }
+        private readonly IDaoCRUD _dao;
         private readonly PasswordHasher _passwordHasher = new PasswordHasher();
-        public AuthService() { 
-            Objeto1 = new DAOCRUD();
+        public AuthService(IDaoCRUD dao) { 
+            _dao = dao;
         }
         public UsuariosCRUD ObtenerUsuario(string nombre)
         {
-            var usuario = Objeto1.GetAllUser(nombre);
+            var usuario = _dao.GetAllUser(nombre);
             if (usuario != null) return usuario;
             throw new Exception("Usuario es null en esta instancia");
         }
 
         public UsuariosCRUD ObtenerUsuarioPublico(string nombre)
         {
-            var usuario = Objeto1.GetUserByNombre(nombre);
+            var usuario = _dao.SearchUser(nombre);
             if (usuario != null) return usuario;
             throw new Exception("Usuario es null en esta instancia");
         }
 
-        public UsuariosCRUD CrearUsuario(string nombre, string email, string pass)
+        public UsuariosCRUD CrearUsuario(string nombre, string email, string pass, string role)
         {
             var hashedPassword = _passwordHasher.HashPassword(pass); // Hashear la contraseña
             var usuario = new UsuariosCRUD
             {
                 Nombre = nombre,
                 Email = email,
-                Pass = hashedPassword
+                Pass = hashedPassword,
+                Role = role
             };
-            var rowsAfectadas = Objeto1.SignUp(nombre, email, hashedPassword);
+            var rowsAfectadas = _dao.SignUp(nombre, email, hashedPassword, role);
             if (rowsAfectadas == 0) throw new Exception("Error creando user");
             return usuario;
         }
 
         public void UpdateUser(string nombre, string email)
         {
-            int rowsAffected = Objeto1.UpdateUserByName(nombre, email);
+            int rowsAffected = _dao.UpdateUserByName(nombre, email);
 
             if (rowsAffected == 0)
             {
@@ -52,7 +53,7 @@ namespace APIAutorizacionAutenticacion.Services
         }
         public void BorrarUsuario(string nombre)
         {
-            int rowsAffected = Objeto1.DeleteUserByName(nombre);
+            int rowsAffected = _dao.DeleteUserByName(nombre);
 
             if (rowsAffected == 0)
             {

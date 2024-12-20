@@ -5,12 +5,15 @@ namespace datos.Entidades
 {
     public class UsuariosCRUD
     {
-        [Required]
+        
         public required string Nombre { get; set; }
-        [Required]
+        
         public required string Email { get; set; }
-        [Required]
+        
         public required string Pass { get; set; }
+
+        public required string Role { get; set; }
+        public int id { get; set; }
 
     }
 }

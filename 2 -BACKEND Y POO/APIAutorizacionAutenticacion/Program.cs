@@ -1,7 +1,10 @@
+using APIAutorizacionAutenticacion.Services;
 using Configuracion;
+using datos.DAOS;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +13,36 @@ var builder = WebApplication.CreateBuilder(args);
 //DI
 builder.Services.Configure<JWTConfig>(builder.Configuration.GetSection("JWT"));
 
+
+
+builder.Services.AddSingleton<IDaoCRUD>(sp =>
+{
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    var connectionString = configuration.GetConnectionString("DefaultConnection");
+    if (string.IsNullOrEmpty(connectionString))
+    {
+        throw new InvalidOperationException("La cadena de conexión 'DefaultConnection' no está configurada en appsettings.json.");
+    }
+    return new DAOCRUD(connectionString);
+});
+
+builder.Services.AddSingleton<IDAOLibros>(sp =>
+{
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    var connectionString = configuration.GetConnectionString("DefaultConnection");
+    if (string.IsNullOrEmpty(connectionString))
+    {
+        throw new InvalidOperationException("La cadena de conexión 'DefaultConnection' no está configurada en appsettings.json.");
+    }
+    return new DAOlibros(connectionString);
+});
+
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddSingleton<TokenService>();
+builder.Services.AddScoped<LibroService>();
+
+
+builder.Services.Configure<JWTConfig>(builder.Configuration.GetSection("JWT"));
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -28,7 +61,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = "localhost",
             ValidAudience = "localhost",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secret_secret_secret_secret_secret"))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secret_secret_secret_secret_secret")),
+            RoleClaimType = ClaimTypes.Role
         };
     });
 

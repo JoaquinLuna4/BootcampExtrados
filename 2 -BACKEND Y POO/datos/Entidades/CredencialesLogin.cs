@@ -12,5 +12,8 @@ namespace datos.Entidades
         [Required]
         public required string EnteredPass { get; set; }
 
+        public int id { get; set; }
+
+
     }
 }

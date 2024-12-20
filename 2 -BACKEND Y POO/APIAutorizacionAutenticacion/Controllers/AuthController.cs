@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Xml.Linq;
 
 namespace APIAutorizacionAutenticacion.Controllers
 {
@@ -15,38 +16,26 @@ namespace APIAutorizacionAutenticacion.Controllers
     [Route("[controller]")]
     public class AuthController : ControllerBase
     {
-        private AuthService _CRUDService { get; set; }
+
+
+        private AuthService _authService;
         private JWTConfig _jwtConfiguracion;
-        public AuthController(IOptions<JWTConfig> JwtConfigu)
+        private readonly TokenService _tokenService;
+        private readonly LibroService _libroService;
+
+        public AuthController(TokenService tokenService, AuthService authService, IOptions<JWTConfig> JwtConfigu, LibroService libroService)
         {
-            _CRUDService = new AuthService();
-            _jwtConfiguracion = JwtConfigu.Value;
+            _authService = authService;
+            _jwtConfiguracion = JwtConfigu.Value; ;
+            _tokenService = tokenService;
+            _libroService = libroService;
         }
 
-        [HttpPost ("JWT")]
-        public string Login() {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfiguracion.Secret));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Sid, "5"),
-                new Claim(ClaimTypes.Name, "JOACO")
-            };
-            var Sectoken = new JwtSecurityToken(
-                _jwtConfiguracion.Issuer,
-                _jwtConfiguracion.Audience,
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(120),
-                signingCredentials: credentials);
-                var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
-            return token;
-
-            }
-
-        [HttpPost("login")]
+         [HttpPost("login")]
         //Este endpoint valida si estan ok las credenciales y genera un token 
         public IActionResult Login([FromBody] CredencialesLogin request)
         {
+
             // 1. Llamar a ObtenerPerfil para validar las credenciales y obtener la información del usuario
             var perfilResult = ObtenerPerfil(request) as OkObjectResult;
 
@@ -60,25 +49,15 @@ namespace APIAutorizacionAutenticacion.Controllers
             var userPublico = perfilResult.Value;
 
             // 3. Generar el token JWT
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secret_secret_secret_secret_secret"));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, (userPublico as dynamic)?.Nombre ?? ""),
-                new Claim(ClaimTypes.Email, (userPublico as dynamic)?.Email ?? ""),
-                //new Claim("Role", (userPublico as dynamic)?.Role ?? "user")
-            };
-
-            var Sectoken = new JwtSecurityToken(
-                issuer: "localhost",
-                audience: "localhost",
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(120),
-                signingCredentials: credentials);
-
-            var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
-
+            var token = _tokenService.GenerarToken(
+                        name: (userPublico as dynamic)?.Nombre ?? "",
+                        email: (userPublico as dynamic)?.Email ?? "",
+                        rol: (userPublico as dynamic)?.Role ?? "user",
+                        id: (userPublico as dynamic)?.id ?? "0"
+                         );
+            
+           
             // 4. Devolver el token junto con la información del usuario
             return Ok(new
             {
@@ -87,24 +66,109 @@ namespace APIAutorizacionAutenticacion.Controllers
             });
         }
 
-      
+
+        [HttpPost("pedir-libro")]
+        [Authorize(Roles = "User")] // Solo accesible por usuarios con rol "usuario"
+        public IActionResult PedirLibro([FromBody] SolicitudLibro solicitud)
+        {
+            try
+            {
+                // Id del Usuario desde el token de auth
+                var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.Sid)?.Value ?? throw new ArgumentNullException());
+                
+                // Calcular fecha de vencimiento
+                var fechaVencimiento = solicitud.FechaPrestamo.AddDays(5);
+
+                // Dato por body de fecha de prestamo
+
+                DateTime fechaPrestamo = solicitud.FechaPrestamo;
+
+                // Lógica para registrar el préstamo en la base de datos 
+                _libroService.PedirLibro(solicitud.NombreLibro);
+
+                //Obtener idLibro
+
+                int idlibro = _libroService.ObtenerIDlibro(solicitud.NombreLibro);
+
+                //Le asigno el libro al usuario
+                _libroService.AsignarLibro(userIdFromToken, fechaVencimiento, fechaPrestamo, idlibro);
+
+
+
+                return Ok(new
+                {
+                    message = "Libro solicitado exitosamente",
+                    fechaVencimiento = fechaVencimiento.ToString("yyyy-MM-dd HH:mm:ss"),
+                    userIdFromToken
+
+                });
+            }
+            catch (ArgumentNullException)
+            {
+                return Unauthorized(new { message = "No se encuentra un ID de usuario válido en el token" });
+            }
+            catch (FormatException)
+            {
+                return Unauthorized(new { message = "El ID del token no tiene el formato esperado" });
+            }
+
+        }
+        [HttpPost("devolver-libro")]
+        [Authorize(Roles = "User")] // Solo accesible por usuarios con rol "usuario"
+        public IActionResult DevolverLibro([FromBody] SolicitudLibro solicitud)
+        {
+            try
+            {
+                //var userNameFromToken = int.Parse(User.FindFirst(ClaimTypes.Name)?.Value ?? throw new ArgumentNullException());
+                var userName = solicitud.NombreUsuario;
+            }
+            catch (ArgumentNullException)
+            {
+                return Unauthorized(new { message = "No se encuentra un ID de usuario válido en el token" });
+            }
+            catch (FormatException)
+            {
+                return Unauthorized(new { message = "El ID del token no tiene el formato esperado" });
+            }
+
+            // Calcular fecha de vencimiento
+            var fechaVencimiento = solicitud.FechaPrestamo.AddDays(5);
+
+            // Lógica para registrar el préstamo en la base de datos 
+            _libroService.DevolverLibro(solicitud.NombreLibro);
+
+
+            return Ok(new
+            {
+                message = "Libro devuelto exitosamente"
+            });
+        }
+
+
+
+
+
+
+
+
+
 
         [HttpGet("profiles/{nombre}")]
         [Authorize]
-        //Este endpoint deja ver a todos los usuarios que sepamos siempre y cuando estemos autorizados
+        //Este endpoint deja ver a todos los usuarios que querramos siempre y cuando estemos autorizados
         public UsuariosCRUD Profiles(string nombre)
         {
-            var usuario = _CRUDService.ObtenerUsuarioPublico(nombre);
+            var usuario = _authService.ObtenerUsuarioPublico(nombre);
             return usuario;
         }
 
         [HttpPost("myprofile")]
-        //Este endpoint unicamente muestra el perfil si coinciden las credenciales enviadas por 
+        //Este endpoint unicamente muestra el perfil si coinciden las credenciales enviadas por body
         public IActionResult ObtenerPerfil([FromBody] CredencialesLogin request)
         {
 
             // Obtener el usuario con el nombre proporcionado
-            var usuario = _CRUDService.ObtenerUsuario(request.Nombre);
+            var usuario = _authService.ObtenerUsuario(request.Nombre);
 
             if (usuario == null)
             {
@@ -121,7 +185,7 @@ namespace APIAutorizacionAutenticacion.Controllers
             if (isPasswordValid)
             {
                 Console.WriteLine("La contraseña es válida");
-                var userpublico = _CRUDService.ObtenerUsuarioPublico(request.Nombre);
+                var userpublico = _authService.ObtenerUsuarioPublico(request.Nombre);
                 return Ok(userpublico);
             }
             else
@@ -138,19 +202,19 @@ namespace APIAutorizacionAutenticacion.Controllers
         public UsuariosCRUD CreateNewUser(UsuariosCRUD obtener)
         {
 
-            return _CRUDService.CrearUsuario(obtener.Nombre, obtener.Email, obtener.Pass);
+            return _authService.CrearUsuario(obtener.Nombre, obtener.Email, obtener.Pass, obtener.Role);
 
         }
         [HttpPost("update/{nombre}/{email}")]
         public void UpdateUser(string nombre, string email)
         {
-            _CRUDService.UpdateUser(nombre, email);
+            _authService.UpdateUser(nombre, email);
         }
 
         [HttpPost("delete/{nombre}")]
         public void DeleteUser(string nombre)
         {
-            _CRUDService.BorrarUsuario(nombre);
+            _authService.BorrarUsuario(nombre);
         }
 
     }

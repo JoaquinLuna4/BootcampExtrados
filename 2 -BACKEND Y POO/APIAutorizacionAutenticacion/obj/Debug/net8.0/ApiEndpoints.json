@@ -23,23 +23,19 @@
   },
   {
     "ContainingType": "APIAutorizacionAutenticacion.Controllers.AuthController",
-    "Method": "Login",
-    "RelativePath": "Auth/JWT",
+    "Method": "DevolverLibro",
+    "RelativePath": "Auth/devolver-libro",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
-        "Type": "System.String",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "solicitud",
+        "Type": "datos.Entidades.SolicitudLibro",
+        "IsRequired": true
       }
-    ]
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "APIAutorizacionAutenticacion.Controllers.AuthController",
@@ -68,6 +64,22 @@
       {
         "Name": "request",
         "Type": "datos.Entidades.CredencialesLogin",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "APIAutorizacionAutenticacion.Controllers.AuthController",
+    "Method": "PedirLibro",
+    "RelativePath": "Auth/pedir-libro",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "solicitud",
+        "Type": "datos.Entidades.SolicitudLibro",
         "IsRequired": true
       }
     ],

@@ -1,11 +1,11 @@
 ﻿
-using datos.Entidades;
+using LibraryTrabajoFinal.Entidades;
 using Dapper;
 using MySqlConnector;
 
 
 
-namespace datos.DAOs
+namespace LibraryTrabajoFinal.DAOs
 {
     //Esto referencia a el ejercicio de APIClase
     public class DAOUsuarios

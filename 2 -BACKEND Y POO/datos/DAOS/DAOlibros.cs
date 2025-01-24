@@ -1,11 +1,11 @@
 ﻿using Dapper;
-using datos.Entidades;
+using LibraryTrabajoFinal.Entidades;
 using MySqlConnector;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Data;
 
 
-namespace datos.DAOS
+namespace LibraryTrabajoFinal.DAOS
 {
     public class DAOlibros : IDAOLibros
     {

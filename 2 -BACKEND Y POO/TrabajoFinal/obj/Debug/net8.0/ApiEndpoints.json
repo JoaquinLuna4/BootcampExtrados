@@ -1,0 +1,128 @@
+[
+  {
+    "ContainingType": "AuthController",
+    "Method": "Login",
+    "RelativePath": "api/auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.Entidades.CredencialesLogin",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AuthController",
+    "Method": "Register",
+    "RelativePath": "api/auth/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.Entidades.RequestRegister",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.UsuariosController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/Usuarios",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.UsuariosController",
+    "Method": "GetUserById",
+    "RelativePath": "api/Usuarios/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "alias",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.UsuariosController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/Usuarios/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "usuario",
+        "Type": "LibraryTrabajoFinal.Entidades.Usuario",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.UsuariosController",
+    "Method": "DeleteUser",
+    "RelativePath": "api/Usuarios/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.UsuariosController",
+    "Method": "Register",
+    "RelativePath": "api/Usuarios/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.Entidades.RequestRegister",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.UsuariosController",
+    "Method": "AdministradorEndpoint",
+    "RelativePath": "api/Usuarios/solo-para-administradores",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

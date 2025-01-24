@@ -1,11 +1,11 @@
 ﻿using MySqlConnector;
-using datos.Entidades;
+using LibraryTrabajoFinal.Entidades;
 using Dapper;
 using System.ComponentModel.Design;
 using System.Text.RegularExpressions;
 using MySqlConnector.Logging;
 
-namespace datos.DAOS
+namespace LibraryTrabajoFinal.DAOS
 {
     public class DAOCRUD : IDaoCRUD
     {

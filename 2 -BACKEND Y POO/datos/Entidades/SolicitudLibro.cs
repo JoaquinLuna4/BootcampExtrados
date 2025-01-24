@@ -1,5 +1,5 @@
 ﻿
-namespace datos.Entidades
+namespace LibraryTrabajoFinal.Entidades
 {
     public class SolicitudLibro
     {

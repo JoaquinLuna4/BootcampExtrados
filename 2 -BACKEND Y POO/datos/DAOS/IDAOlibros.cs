@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace datos.DAOS
+namespace LibraryTrabajoFinal.DAOS
 {
     public interface IDAOLibros
     {

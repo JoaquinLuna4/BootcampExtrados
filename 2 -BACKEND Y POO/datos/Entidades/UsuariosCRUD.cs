@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace datos.Entidades
+namespace LibraryTrabajoFinal.Entidades
 {
     public class UsuariosCRUD
     {

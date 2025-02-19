@@ -1,5 +1,7 @@
 ﻿using LibraryTrabajoFinal.DAOS;
 using LibraryTrabajoFinal.Entidades;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TrabajoFinal.Servicios
@@ -8,15 +10,25 @@ namespace TrabajoFinal.Servicios
     {
         private readonly IDAOUsuarios _dao;
         private readonly PasswordHasher _passwordHasher = new PasswordHasher();
-
+        
         public UsuarioService(IDAOUsuarios dao)
         {
             _dao = dao;
+            
         }
-
+        public int ContarUsuariosPorRol(UserRole rol)
+        {
+            return _dao.CountUserByRole(rol);
+        }
         public Usuario ObtenerUsuario(string alias)
         {
             var usuario = _dao.GetUserByAlias(alias);
+            if (usuario != null) return usuario;
+            throw new Exception("Usuario no encontrado.");
+        }
+        public Usuario ObtenerUsuarioPorId(int id)
+        {
+            var usuario = _dao.GetUserById(id);
             if (usuario != null) return usuario;
             throw new Exception("Usuario no encontrado.");
         }
@@ -28,9 +40,11 @@ namespace TrabajoFinal.Servicios
             throw new Exception("No hay usuarios registrados.");
         }
 
-        public Usuario CrearUsuario(string nombre, string email, string password, UserRole rol, string alias, string? pais = null, string? apellido = null)
+        public Usuario CrearUsuario(string nombre, string email, string password, UserRole rol, string alias, string? pais = null, string? apellido = null, int? idCreador = null)
         {
             var hashedPassword = _passwordHasher.HashPassword(password);
+
+            
 
             Usuario usuario = new()
             {
@@ -42,7 +56,8 @@ namespace TrabajoFinal.Servicios
                 Pais = pais, // Opcional
                 Apellido = apellido, // Opcional
                 Rol = rol,
-                Fecha_Registro = DateTime.UtcNow // Fecha actual
+                Fecha_Registro = DateTime.UtcNow, // Fecha actual
+                IdCreador = idCreador
             };
 
             var id = _dao.CreateUser(usuario);

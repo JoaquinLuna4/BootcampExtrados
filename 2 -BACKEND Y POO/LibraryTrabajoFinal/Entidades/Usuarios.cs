@@ -12,6 +12,8 @@
         public  string? Pais { get; set; }
         public required UserRole Rol { get; set; }
         public required DateTime Fecha_Registro { get; set; }
+        public int? IdCreador { get; set; }
+
     }
     public enum UserRole
     {

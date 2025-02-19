@@ -2,7 +2,7 @@
 {
     public class Torneo
     {
-        public required int Id { get; set; }
+        public int Id { get; set; }
         public required string Nombre { get; set; }
         public required int OrganizadorId { get; set; } // Referencia a un organizador (Usuario)
 
@@ -11,17 +11,18 @@
         public required string Pais { get; set; }
 
         // Fase actual del torneo
-        public required TorneoFase Fase { get; set; }
+        public required string Fase { get; set; }
 
         // Relación con jueces y jugadores
         public List<Usuario>? Jueces { get; set; }
         public List<Usuario>? Jugadores { get; set; }
+        public int? GanadorId { get; set; }
     }
 
-    public enum TorneoFase
+    public static class TorneoFase
     {
-        Registro,
-        Torneo,
-        Finalizacion
+        public const string Registro = "Registro";
+        public const string Torneo = "Torneo";
+        public const string Finalizacion = "Finalizacion";
     }
 }

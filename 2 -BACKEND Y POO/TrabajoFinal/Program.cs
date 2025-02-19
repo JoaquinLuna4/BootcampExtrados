@@ -36,14 +36,14 @@ void ConfigureServices(WebApplicationBuilder builder)
 
     // Registro de Servicios
     builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+    builder.Services.AddScoped<ITorneoService, TorneoService>();
+    builder.Services.AddScoped<ITorneoJugadorService, TorneoJugadorService>();
     builder.Services.AddScoped<JwtService>();
- 
-
 
     // Configuración de JWT
+    var jwtConfig = builder.Configuration.GetSection("JWT").Get<JWTConfig>();
     builder.Services.Configure<JWTConfig>(builder.Configuration.GetSection("JWT"));
 
-    JWTConfig jwtConfig = builder.Services.BuildServiceProvider().GetService<IOptions<JWTConfig>>().Value;
 
     builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(Options =>
@@ -71,15 +71,42 @@ void ConfigureServices(WebApplicationBuilder builder)
         }
         return new DAOUsuarios(connectionString);
     });
+
+    //Registro de DAO Torneos
+    builder.Services.AddScoped<ITorneoDAO>(sp =>
+    {
+        var config = sp.GetRequiredService<IConfiguration>();
+        var connectionString = config.GetConnectionString("DefaultConnection");
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            throw new InvalidOperationException("La cadena de conexión no está configurada.");
+        }
+        return new TorneoDAO(connectionString);
+    });
+
+    // Registro del DAO y Servicio de TorneoJugador
+    builder.Services.AddScoped<IDAOTorneoJugador>(sp =>
+    {
+        var configuration = sp.GetRequiredService<IConfiguration>();
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            throw new InvalidOperationException("La cadena de conexión 'DefaultConnection' no está configurada en appsettings.json.");
+        }
+        return new DAOTorneoJugador(connectionString);
+    });
+
+
 }
+
 
 void ConfigureMiddleware(WebApplication app)
 {
-    if (app.Environment.IsDevelopment())
-    {
-        app.UseSwagger();
-        app.UseSwaggerUI();
-    }
+    //if (app.Environment.IsDevelopment())
+    //{
+    //    app.UseSwagger();
+    //    app.UseSwaggerUI();
+    //}
 
     app.UseHttpsRedirection();
     app.UseAuthentication(); // Habilitar autenticación

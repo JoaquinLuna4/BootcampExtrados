@@ -1,5 +1,6 @@
-﻿
-namespace LibraryTrabajoFinal.Entidades
+﻿using LibraryTrabajoFinal.Entidades;
+
+namespace LibraryTrabajoFinal.DTOS
 {
     public class RequestRegister
     {

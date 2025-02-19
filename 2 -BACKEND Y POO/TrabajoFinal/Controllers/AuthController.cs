@@ -1,4 +1,4 @@
-﻿using LibraryTrabajoFinal.Entidades;
+﻿using LibraryTrabajoFinal.DTOS;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using TrabajoFinal.Servicios;

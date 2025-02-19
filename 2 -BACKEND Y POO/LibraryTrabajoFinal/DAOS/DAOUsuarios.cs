@@ -15,15 +15,14 @@ namespace LibraryTrabajoFinal.DAOS
             _connectionString = connectionString;
         }
 
-        public int CreateUser(Usuario user)
+        /* ------------------ UTILIDADES  ------------------ */
+
+
+        public int CountUserByRole(UserRole rol)
         {
             using var connection = new MySqlConnection(_connectionString);
-            const string query = @"
-        INSERT INTO usuarios (Nombre, Apellido, Alias, Email, Password, Pais, Rol, FechaRegistro)
-        VALUES (@Nombre, @Apellido, @Alias, @Email, @Password, @Pais, @Rol, @Fecha_Registro);
-        SELECT LAST_INSERT_ID();";
-
-            return connection.ExecuteScalar<int>(query, user);
+            const string query = "SELECT COUNT(*) FROM usuarios WHERE Rol = @Rol";
+            return connection.ExecuteScalar<int>(query, new { Rol = rol.ToString() });
         }
         public IEnumerable<Usuario> GetAllUsers()
         {
@@ -36,8 +35,43 @@ namespace LibraryTrabajoFinal.DAOS
         {
             using var connection = new MySqlConnection(_connectionString);
             const string query = "SELECT * FROM usuarios WHERE alias= @alias";
-            return connection.QueryFirstOrDefault<Usuario>(query, new { Alias= alias });
+            return connection.QueryFirstOrDefault<Usuario>(query, new { Alias= alias});
         }
+        public Usuario? GetUserById(int id)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+            const string query = "SELECT * FROM usuarios WHERE Id= @id";
+            return connection.QueryFirstOrDefault<Usuario>(query, new { Id = id });
+        }
+
+        /* ------------------ CRUD DEL DAO ------------------ */
+
+        public int CreateUser(Usuario user)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+            const string query = @"
+        INSERT INTO usuarios (Nombre, Apellido, Alias, Email, Password, Pais, Rol, FechaRegistro, id_creador)
+        VALUES (@Nombre, @Apellido, @Alias, @Email, @Password, @Pais, @Rol, @Fecha_Registro, @IdCreador);
+        SELECT LAST_INSERT_ID();";
+
+
+            var parametros = new
+            {
+                user.Nombre,
+                user.Apellido,
+                user.Alias,
+                user.Email,
+                user.Password,
+                user.Pais,
+                Rol = Enum.GetName(typeof(UserRole), user.Rol),  //  Conversión a string para MySQL ENUM
+                user.Fecha_Registro,
+                user.IdCreador
+            };
+
+            return connection.ExecuteScalar<int>(query, parametros);
+        }
+        
+
 
         public bool UpdateUserByID(Usuario user)
         {
@@ -52,14 +86,15 @@ namespace LibraryTrabajoFinal.DAOS
             Pais = @Pais,
             Rol = @Rol,
             FechaRegistro = @FechaRegistro
+            id_creador = @IdCreador
             WHERE Id = @Id";
             return connection.Execute(query, user) > 0;
         }
         public bool DeleteUserByID(int id)
         {
             using var connection = new MySqlConnection(_connectionString);
-            const string query = "DELETE FROM usuarios WHERE id= @id";
-            return connection.Execute(query, new { Id = id })>0;
+            const string query = "UPDATE usuarios SET activo = FALSE WHERE id = @id"; // Borrado lógico
+            return connection.Execute(query, new { Id = id }) > 0;
         }
 
     }

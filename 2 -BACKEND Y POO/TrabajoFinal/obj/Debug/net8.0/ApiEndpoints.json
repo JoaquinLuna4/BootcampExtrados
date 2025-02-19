@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "LibraryTrabajoFinal.Entidades.CredencialesLogin",
+        "Type": "LibraryTrabajoFinal.DTOS.CredencialesLogin",
         "IsRequired": true
       }
     ],
@@ -25,7 +25,150 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "LibraryTrabajoFinal.Entidades.RequestRegister",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestRegister",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TorneosController",
+    "Method": "CrearTorneo",
+    "RelativePath": "api/torneos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "torneo",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestCrearTorneo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TorneosController",
+    "Method": "ObtenerTodosLosTorneos",
+    "RelativePath": "api/torneos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TorneosController",
+    "Method": "ObtenerTorneoPorId",
+    "RelativePath": "api/torneos/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TorneosController",
+    "Method": "ActualizarTorneo",
+    "RelativePath": "api/torneos/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "torneo",
+        "Type": "LibraryTrabajoFinal.Entidades.Torneo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TorneosController",
+    "Method": "EliminarTorneo",
+    "RelativePath": "api/torneos/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TorneosController",
+    "Method": "AvanzarFase",
+    "RelativePath": "api/torneos/avanzar-fase",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestAvanzarFase",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TorneoJugadorController",
+    "Method": "ObtenerJugadoresPorTorneo",
+    "RelativePath": "api/torneos/jugadores/{torneoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "torneoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TorneoJugadorController",
+    "Method": "DesinscribirJugador",
+    "RelativePath": "api/torneos/jugadores/desinscribir",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestDesinscripcionTorneo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TorneoJugadorController",
+    "Method": "InscribirJugador",
+    "RelativePath": "api/torneos/jugadores/inscribir",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestInscripcionTorneo",
         "IsRequired": true
       }
     ],
@@ -101,15 +244,15 @@
   },
   {
     "ContainingType": "TrabajoFinal.Controllers.UsuariosController",
-    "Method": "Register",
-    "RelativePath": "api/Usuarios/register",
+    "Method": "CrearAdministrador",
+    "RelativePath": "api/Usuarios/crear-administrador",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "LibraryTrabajoFinal.Entidades.RequestRegister",
+        "Name": "usuario",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestRegister",
         "IsRequired": true
       }
     ],
@@ -117,12 +260,70 @@
   },
   {
     "ContainingType": "TrabajoFinal.Controllers.UsuariosController",
-    "Method": "AdministradorEndpoint",
-    "RelativePath": "api/Usuarios/solo-para-administradores",
+    "Method": "CrearJuez",
+    "RelativePath": "api/Usuarios/crear-juez",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuario",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestRegister",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.UsuariosController",
+    "Method": "CrearOrganizador",
+    "RelativePath": "api/Usuarios/crear-organizador",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuario",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestRegister",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.UsuariosController",
+    "Method": "ListarUsuarios",
+    "RelativePath": "api/Usuarios/listar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.UsuariosController",
+    "Method": "ObtenerMiPerfil",
+    "RelativePath": "api/Usuarios/mi-perfil",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.UsuariosController",
+    "Method": "RegistrarJugador",
+    "RelativePath": "api/Usuarios/registrar-jugador",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuario",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestRegister",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]

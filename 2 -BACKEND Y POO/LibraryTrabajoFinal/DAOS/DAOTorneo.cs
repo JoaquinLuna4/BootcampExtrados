@@ -47,7 +47,12 @@ namespace LibraryTrabajoFinal.DAOS
         {
             using var connection = new MySqlConnection(_connectionString);
             const string query = "SELECT Fase FROM torneos WHERE Id = @id AND Eliminado = FALSE";
-            return connection.QueryFirstOrDefault<string>(query, new { Id = id });
+            
+            var fase = connection.QueryFirstOrDefault<string>(query, new { Id = id });
+            if (fase == null)
+                throw new InvalidOperationException($"No se encontró la fase del torneo con ID {id}.");
+            return fase;
+
         }
 
         public bool AvanzarFase(int torneoId, string nuevaFase)
@@ -101,6 +106,18 @@ namespace LibraryTrabajoFinal.DAOS
                 torneo.Pais,
                 Fase = torneo.Fase.ToString()
             });
+
+            return filasAfectadas > 0;
+        }
+        public bool FinalizarTorneo(int torneoId, int ganadorId)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+            const string query = @"
+                UPDATE Torneos 
+                SET Fase = 'Finalizacion', GanadorId = @GanadorId
+                WHERE Id = @TorneoId";
+
+            int filasAfectadas = connection.Execute(query, new { TorneoId = torneoId, GanadorId = ganadorId });
 
             return filasAfectadas > 0;
         }

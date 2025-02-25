@@ -32,6 +32,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TrabajoFinal.Controllers.JuegosController",
+    "Method": "CrearJuego",
+    "RelativePath": "api/juegos/crear",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestCrearJuego",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.JuegosController",
+    "Method": "FinalizarJuego",
+    "RelativePath": "api/juegos/finalizar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestFinalizarJuego",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TorneosController",
     "Method": "CrearTorneo",
     "RelativePath": "api/torneos",
@@ -111,16 +143,80 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TrabajoFinal.Controllers.JuegosController",
+    "Method": "ObtenerJuegosPorTorneo",
+    "RelativePath": "api/torneos/{torneoId}/juegos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "torneoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TorneosController",
     "Method": "AvanzarFase",
-    "RelativePath": "api/torneos/avanzar-fase",
+    "RelativePath": "api/torneos/avanzar-ronda/{torneoId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "torneoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.TorneoJuezController",
+    "Method": "ObtenerJuecesPorTorneo",
+    "RelativePath": "api/torneos/jueces/{torneoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "torneoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.TorneoJuezController",
+    "Method": "AsignarJuezATorneo",
+    "RelativePath": "api/torneos/jueces/asignar",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "LibraryTrabajoFinal.DTOS.RequestAvanzarFase",
+        "Type": "LibraryTrabajoFinal.EntidadesRelaciones.TorneoJuez",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.TorneoJuezController",
+    "Method": "EliminarJuezDeTorneo",
+    "RelativePath": "api/torneos/jueces/eliminar",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.EntidadesRelaciones.TorneoJuez",
         "IsRequired": true
       }
     ],

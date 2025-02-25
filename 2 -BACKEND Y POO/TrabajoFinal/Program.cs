@@ -38,6 +38,8 @@ void ConfigureServices(WebApplicationBuilder builder)
     builder.Services.AddScoped<IUsuarioService, UsuarioService>();
     builder.Services.AddScoped<ITorneoService, TorneoService>();
     builder.Services.AddScoped<ITorneoJugadorService, TorneoJugadorService>();
+    builder.Services.AddScoped<ITorneoJuezService, TorneoJuezService>();
+    builder.Services.AddScoped<IJuegoService, JuegoService>();
     builder.Services.AddScoped<JwtService>();
 
     // Configuración de JWT
@@ -60,14 +62,14 @@ void ConfigureServices(WebApplicationBuilder builder)
             RoleClaimType = ClaimTypes.Role
         };
     });
-    // Registro de DAO
+    // Registro de DAO Usuarios
     builder.Services.AddSingleton<IDAOUsuarios>(sp =>
     {
         var configuration = sp.GetRequiredService<IConfiguration>();
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         if (string.IsNullOrEmpty(connectionString))
         {
-            throw new InvalidOperationException("La cadena de conexión 'DefaultConnection' no está configurada en appsettings.json.");
+            throw new InvalidOperationException("La cadena de conexión no está configurada");
         }
         return new DAOUsuarios(connectionString);
     });
@@ -79,21 +81,46 @@ void ConfigureServices(WebApplicationBuilder builder)
         var connectionString = config.GetConnectionString("DefaultConnection");
         if (string.IsNullOrEmpty(connectionString))
         {
-            throw new InvalidOperationException("La cadena de conexión no está configurada.");
+            throw new InvalidOperationException("La cadena de conexión no está configurada");
         }
         return new TorneoDAO(connectionString);
     });
 
-    // Registro del DAO y Servicio de TorneoJugador
+    // Registro de DAO TorneoJueces
+    builder.Services.AddScoped<IDAOTorneoJuez>(sp =>
+    {
+        var configuration = sp.GetRequiredService<IConfiguration>();
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            throw new InvalidOperationException("La cadena de conexión no está configurada");
+        }
+        return new DAOTorneoJuez(connectionString);
+    });
+
+    // Registro del DAO TorneoJugador
     builder.Services.AddScoped<IDAOTorneoJugador>(sp =>
     {
         var configuration = sp.GetRequiredService<IConfiguration>();
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         if (string.IsNullOrEmpty(connectionString))
         {
-            throw new InvalidOperationException("La cadena de conexión 'DefaultConnection' no está configurada en appsettings.json.");
+            throw new InvalidOperationException("La cadena de conexión no está configurada");
         }
         return new DAOTorneoJugador(connectionString);
+    });
+    // Registro de DAOJuego 
+    builder.Services.AddScoped<IDAOJuego>(sp =>
+    {
+        var configuration = sp.GetRequiredService<IConfiguration>();
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            throw new InvalidOperationException("La cadena de conexión 'DefaultConnection' no está configurada en appsettings.json.");
+        }
+
+        return new DAOJuego(connectionString);
     });
 
 

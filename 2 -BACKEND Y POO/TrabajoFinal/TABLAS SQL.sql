@@ -78,23 +78,24 @@ CREATE TABLE Torneos (
 
 
 /*Relación entre torneos y jueces*/
-CREATE TABLE Torneos_Jueces (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    TorneoId INT,
-    JuezId INT,
+CREATE TABLE TorneoJuez (
+    TorneoId INT NOT NULL,
+    JuezId INT NOT NULL,
     FOREIGN KEY (TorneoId) REFERENCES Torneos(Id) ON DELETE CASCADE,
-    FOREIGN KEY (JuezId) REFERENCES Usuarios(Id) ON DELETE CASCADE
+    FOREIGN KEY (JuezId) REFERENCES Usuarios(Id) ON DELETE CASCADE,
+    PRIMARY KEY (TorneoId, JuezId)
 );
 
 /*Define cada juego dentro de un torneo.*/
 CREATE TABLE Juegos (
     Id INT AUTO_INCREMENT PRIMARY KEY,
-    TorneoId INT,
-    FechaHoraInicio DATETIME,
-    FechaHoraFin DATETIME,
-    Jugador1Id INT,
-    Jugador2Id INT,
-    GanadorId INT,
+    TorneoId INT NOT NULL,
+    FechaHoraInicio DATETIME NOT NULL,
+    FechaHoraFin DATETIME NULL,
+    Jugador1Id INT NOT NULL,
+    Jugador2Id INT NOT NULL,
+    GanadorId INT NULL,
+    Estado ENUM('Pendiente', 'En Juego', 'Finalizado') NOT NULL DEFAULT 'Pendiente',
     FOREIGN KEY (TorneoId) REFERENCES Torneos(Id) ON DELETE CASCADE,
     FOREIGN KEY (Jugador1Id) REFERENCES Usuarios(Id) ON DELETE CASCADE,
     FOREIGN KEY (Jugador2Id) REFERENCES Usuarios(Id) ON DELETE CASCADE,
@@ -136,14 +137,14 @@ SELECT * FROM torneos WHERE ID= 2
 SELECT * FROM mazos 
 
 
-SELECT * FROM torneos WHERE Id = 3 AND Eliminado = FALSE
+SELECT * FROM torneos WHERE Id = 4 AND Eliminado = FALSE
 SHOW CREATE TABLE torneos;
 ALTER TABLE torneos MODIFY COLUMN Fase ENUM('Registro', 'Torneo', 'Finalizacion') NOT NULL;
 SHOW CREATE TABLE torneos;
 
 UPDATE torneos 
 SET Fase = 'Registro' 
-WHERE Id = 4 
+WHERE Id = 4
   AND Fase != 'Finalizacion' 
   AND Eliminado = FALSE;
 
@@ -169,3 +170,7 @@ ALTER TABLE usuarios ADD COLUMN Password VARCHAR(255) NOT NULL;
 INSERT INTO torneos (Nombre, OrganizadorId, FechaInicio, FechaFin, Fase, Pais)
 VALUES ("Torneo de Primavera", 15, "2024-09-10T10:00:00", "2024-09-15T18:00:00", "Registro","España");
 SELECT LAST_INSERT_ID();
+
+
+SELECT * FROM torneo_jugadores WHERE torneoid = 4
+

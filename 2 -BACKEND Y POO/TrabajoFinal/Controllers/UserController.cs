@@ -55,30 +55,7 @@ namespace TrabajoFinal.Controllers
                 return BadRequest(new { Message = "ID Creador no se pudo parsear a int" });
             }
         }
-        //// Crear Organizador (solo admin)
-        //[Authorize(Roles = "Administrador")]
-        //[HttpPost("crear-organizador")]
-        //public IActionResult CrearOrganizador([FromBody] RequestRegister usuario)
-        //{
-        //    if (usuario.Rol != UserRole.Organizador)
-        //    {
-        //        return BadRequest(new { Message = "El rol a crear debe ser 'Organizador'." });
-        //    }
-        //    var idCreadorString = User.FindFirstValue(ClaimTypes.Sid);
-        //    Console.WriteLine("Este es el creador string",idCreadorString);
-        //    if (int.TryParse(idCreadorString, out int idCreador))
-        //    {
-        //        var nuevoOrganizador = _usuarioService.CrearUsuario(
-        //        usuario.Nombre, usuario.Email, usuario.Password, usuario.Rol, usuario.Alias, usuario.Pais, usuario.Apellido);
-
-        //        return Ok(new { Message = "Organizador creado exitosamente", Usuario = nuevoOrganizador });
-        //    }
-        // else
-        //    {
-        //        return BadRequest(new { Message = "ID Creador no se pudo parsear a int" });
-        //    }
-        //}
-
+       
         [Authorize]
         [HttpPost("crear-organizador")]
         public IActionResult CrearOrganizador([FromBody] RequestRegister usuario)

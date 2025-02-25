@@ -67,6 +67,176 @@
         }
       }
     },
+    "/api/juegos/crear": {
+      "post": {
+        "tags": [
+          "Juegos"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCrearJuego"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCrearJuego"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCrearJuego"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/torneos/{torneoId}/juegos": {
+      "get": {
+        "tags": [
+          "Juegos"
+        ],
+        "parameters": [
+          {
+            "name": "torneoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/juegos/finalizar": {
+      "post": {
+        "tags": [
+          "Juegos"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestFinalizarJuego"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestFinalizarJuego"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestFinalizarJuego"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/torneos/jueces/asignar": {
+      "post": {
+        "tags": [
+          "TorneoJuez"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TorneoJuez"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TorneoJuez"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TorneoJuez"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/torneos/jueces/eliminar": {
+      "delete": {
+        "tags": [
+          "TorneoJuez"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TorneoJuez"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TorneoJuez"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TorneoJuez"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/torneos/jueces/{torneoId}": {
+      "get": {
+        "tags": [
+          "TorneoJuez"
+        ],
+        "parameters": [
+          {
+            "name": "torneoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/torneos/jugadores/inscribir": {
       "post": {
         "tags": [
@@ -277,30 +447,22 @@
         }
       }
     },
-    "/api/torneos/avanzar-fase": {
+    "/api/torneos/avanzar-ronda/{torneoId}": {
       "post": {
         "tags": [
           "Torneos"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestAvanzarFase"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestAvanzarFase"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestAvanzarFase"
-              }
+        "parameters": [
+          {
+            "name": "torneoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -579,8 +741,11 @@
         },
         "additionalProperties": false
       },
-      "RequestAvanzarFase": {
+      "RequestCrearJuego": {
         "required": [
+          "fechaHoraInicio",
+          "jugador1Id",
+          "jugador2Id",
           "torneoId"
         ],
         "type": "object",
@@ -588,6 +753,18 @@
           "torneoId": {
             "type": "integer",
             "format": "int32"
+          },
+          "jugador1Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "jugador2Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaHoraInicio": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -639,6 +816,29 @@
           "jugadorId": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RequestFinalizarJuego": {
+        "required": [
+          "fechaHoraFin",
+          "ganadorId",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ganadorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaHoraFin": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -763,6 +963,20 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TorneoJuez": {
+        "type": "object",
+        "properties": {
+          "torneoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "juezId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

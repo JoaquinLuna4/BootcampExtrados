@@ -78,13 +78,13 @@ using TrabajoFinal.Servicios.Excepciones;
         }
     // Avanzar fase del torneo
     [Authorize(Roles = "Organizador,Administrador")]
-    [HttpPost("avanzar-fase")]
-    public IActionResult AvanzarFase([FromBody] RequestAvanzarFase request)
+    [HttpPost("avanzar-ronda/{torneoId}")]
+    public IActionResult AvanzarFase(int torneoId)
     {
         try
         {
-            var resultado = _torneoService.AvanzarFase(request.torneoId);
-            return resultado
+            var torneo = _torneoService.AvanzarFase(torneoId);
+            return torneo
                 ? Ok(new { Message = "La fase del torneo avanzó correctamente." })
                 : BadRequest(new { Message = "No se pudo avanzar la fase del torneo." });
         }

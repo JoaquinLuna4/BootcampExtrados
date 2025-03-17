@@ -23,11 +23,10 @@ ADD COLUMN activo BOOLEAN DEFAULT TRUE;
 
 CREATE TABLE Cartas (
     Id INT AUTO_INCREMENT PRIMARY KEY,
-    Nombre VARCHAR(100),
-    Ataque INT,
-    Defensa INT,
-    Ilustracion VARCHAR(255),
-    FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    Nombre VARCHAR(255) NOT NULL,
+    Ataque INT NOT NULL,
+    Defensa INT NOT NULL,
+    Ilustracion TEXT NOT NULL
 );
 
 CREATE TABLE Series (
@@ -38,27 +37,27 @@ CREATE TABLE Series (
 /*Relación muchos a muchos entre Series y Cartas*/
 /*ON DELETE CASCADE ayuda a eliminar toda la referencia si se elimina el dato de la tabla primaria 
 ya que luego carece de sentido*/
-CREATE TABLE Series_Cartas (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    SerieId INT,
-    CartaId INT,
-    FOREIGN KEY (SerieId) REFERENCES Series(Id) ON DELETE CASCADE,
-    FOREIGN KEY (CartaId) REFERENCES Cartas(Id) ON DELETE CASCADE
+CREATE TABLE CartasSeries (
+	 CartaId INT NOT NULL,
+    SerieId INT NOT NULL,
+    PRIMARY KEY (CartaId, SerieId),
+    FOREIGN KEY (CartaId) REFERENCES Cartas(Id) ON DELETE CASCADE,
+    FOREIGN KEY (SerieId) REFERENCES Series(Id) ON DELETE CASCADE
 );
 
 CREATE TABLE Mazos (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    JugadorId INT,
-    TorneoId INT,
-    FOREIGN KEY (JugadorId) REFERENCES Usuarios(Id) ON DELETE CASCADE,
-    FOREIGN KEY (TorneoId) REFERENCES Torneos(Id) ON DELETE CASCADE
+   Id INT AUTO_INCREMENT PRIMARY KEY,
+    JugadorId INT NOT NULL,
+    Nombre VARCHAR(255) NOT NULL,
+    FOREIGN KEY (JugadorId) REFERENCES Usuarios(Id) ON DELETE CASCADE
+
 );
 
 /*Relación muchos a muchos entre Mazos y Cartas*/
-CREATE TABLE Mazos_Cartas (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    MazoId INT,
-    CartaId INT,
+CREATE TABLE MazosCartas (
+  MazoId INT NOT NULL,
+    CartaId INT NOT NULL,
+    PRIMARY KEY (MazoId, CartaId),
     FOREIGN KEY (MazoId) REFERENCES Mazos(Id) ON DELETE CASCADE,
     FOREIGN KEY (CartaId) REFERENCES Cartas(Id) ON DELETE CASCADE
 );
@@ -122,40 +121,49 @@ CREATE TABLE Torneo_Jugadores (
     FOREIGN KEY (JugadorId) REFERENCES Usuarios(Id) ON DELETE CASCADE
 );
 
+/* Relacion torneo mazo, para asignar mazos de los jugadores a los torneos */
+CREATE TABLE TorneoMazo (
+    TorneoId INT NOT NULL,
+    JugadorId INT NOT NULL,
+    MazoId INT NOT NULL,
+    FOREIGN KEY (TorneoId) REFERENCES Torneos(Id) ON DELETE CASCADE,
+    FOREIGN KEY (JugadorId) REFERENCES Usuarios(Id) ON DELETE CASCADE,
+    FOREIGN KEY (MazoId) REFERENCES Mazos(Id) ON DELETE CASCADE,
+    PRIMARY KEY (TorneoId, JugadorId)
+);
+
+/*Relacion torneo series para poder indicar series permitidas*/
+CREATE TABLE TorneosSeries (
+    TorneoId INT NOT NULL,
+    SerieId INT NOT NULL,
+    PRIMARY KEY (TorneoId, SerieId),
+    FOREIGN KEY (TorneoId) REFERENCES Torneos(Id) ON DELETE CASCADE,
+    FOREIGN KEY (SerieId) REFERENCES Series(Id) ON DELETE CASCADE
+);
+
 
 INSERT INTO Torneo_Jugadores (torneoID, JugadorId, MazoId) VALUES (3,17,1)
 
 SELECT * from Torneos_Jugadores 
 
 
-INSERT INTO Usuarios (Nombre, Apellido, Alias, Email, Pais, Rol, FechaRegistro)
-VALUES ('Joaquin', 'Luna', 'JoacoLuna4', 'joacoluna@mail.com', 'Argentina', 'Administrador', '1112025');
-SELECT LAST_INSERT_ID();
 
-SELECT * FROM usuarios WHERE rol= "Jugador"
-SELECT * FROM torneos WHERE ID= 2
+
+SELECT * FROM usuarios WHERE rol= "Organizador"
+SELECT * FROM torneos WHERE ID=11
 SELECT * FROM mazos 
 
 
-SELECT * FROM torneos WHERE Id = 4 AND Eliminado = FALSE
-SHOW CREATE TABLE torneos;
-ALTER TABLE torneos MODIFY COLUMN Fase ENUM('Registro', 'Torneo', 'Finalizacion') NOT NULL;
-SHOW CREATE TABLE torneos;
+SELECT * FROM torneos WHERE Id = 11 AND Eliminado = FALSE
+
 
 UPDATE torneos 
 SET Fase = 'Registro' 
-WHERE Id = 4
-  AND Fase != 'Finalizacion' 
+WHERE Id = 7
+  AND Fase != 'Finalizado' 
   AND Eliminado = FALSE;
 
-ALTER TABLE torneos 
-MODIFY COLUMN Fase VARCHAR(20) NOT NULL;
 
-
-
-SELECT Id, Nombre, Fase, Eliminado FROM torneos WHERE Id = 4;
-ALTER TABLE torneos MODIFY COLUMN Eliminado BOOLEAN DEFAULT FALSE;
-UPDATE torneos 
 SET Fase = 'Torneo' 
 WHERE Id = 4 AND Fase != 'Finalizacion' AND Eliminado = FALSE;
 SELECT COUNT(*) FROM Torneos WHERE Id = 4 AND Eliminado = FALSE
@@ -172,5 +180,31 @@ VALUES ("Torneo de Primavera", 15, "2024-09-10T10:00:00", "2024-09-15T18:00:00",
 SELECT LAST_INSERT_ID();
 
 
-SELECT * FROM torneo_jugadores WHERE torneoid = 4
+SELECT * FROM torneo_jugadores WHERE torneoid = 11
+SELECT * FROM torneomazo WHERE torneoid = 11
 
+SELECT * FROM juegos WHERE torneoid = 11
+
+SELECT COUNT(*) FROM Torneo_Jugadores WHERE TorneoId = 11 AND JugadorId = 27
+
+SELECT * FROM series WHERE id=1
+SELECT * FROM cartas
+SELECT * FROM mazos WHERE id=9
+
+/*Que cartas tiene un mazo*/
+SELECT c.Id AS CartaId, c.Nombre 
+        FROM MazosCartas mc
+        JOIN Cartas c ON mc.CartaId = c.Id
+        WHERE mc.MazoId = 9
+
+/*Que series tiene un mazo*/
+SELECT c.Id AS CartaId, c.Nombre, cs.SerieId
+        FROM MazosCartas mc
+        JOIN Cartas c ON mc.CartaId = c.Id
+        JOIN CartasSeries cs ON c.Id = cs.CartaId
+        WHERE mc.MazoId =9
+
+/*Ver que series estan permitidas en torneo*/
+SELECT SerieId 
+        FROM TorneosSeries 
+        WHERE TorneoId = 11

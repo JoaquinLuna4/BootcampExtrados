@@ -10,5 +10,6 @@ namespace LibraryTrabajoFinal.DTOS
         public required DateTime FechaInicio { get; set; }
         public required DateTime FechaFin { get; set; }
         public required string Pais { get; set; }
+        public List<int>? SeriesIds { get; set; }
     }
 }

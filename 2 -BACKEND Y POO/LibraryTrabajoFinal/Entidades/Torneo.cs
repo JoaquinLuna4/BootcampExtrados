@@ -17,6 +17,9 @@
         public List<Usuario>? Jueces { get; set; }
         public List<Usuario>? Jugadores { get; set; }
         public int? GanadorId { get; set; }
+
+        // Es la relacion torneo series pero no se almacena en la tabla SQL
+        public List<int>? SeriesIds { get; set; }
     }
 
     public static class TorneoFase

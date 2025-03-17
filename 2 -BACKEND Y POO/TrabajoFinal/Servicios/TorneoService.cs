@@ -40,7 +40,46 @@ namespace TrabajoFinal.Servicios
                 Fase = TorneoFase.Registro // Fase por defecto
             };
 
+            // Recupero la id del torneo creado
+            int torneoId = _torneoDAO.CrearTorneo(nuevoTorneo);
+
+            // Si el torneo tiene series permitidas, las insertamos
+            if (torneo.SeriesIds != null && torneo.SeriesIds.Any())
+            {
+                _torneoDAO.AsignarSeriesATorneo(torneoId, torneo.SeriesIds);
+            }
+
             return _torneoDAO.CrearTorneo(nuevoTorneo);
+        }
+       
+        public void AgregarSeriesATorneoExistente(int torneoId, List<int> seriesIds)
+        {
+            // Validar que el torneo existe
+            if (!_torneoDAO.TorneoExiste(torneoId))
+            {
+                throw new TorneoNoEncontradoException(torneoId);
+            }
+
+            // Obtener la fase actual y validar que esté en fase de "Registro"
+            string faseActual = _torneoDAO.ObtenerFaseTorneoPorId(torneoId);
+            if (faseActual != TorneoFase.Registro)
+            {
+                throw new FaseRegistroCaducadaException { TorneoId = torneoId, FaseActual = faseActual };
+            }
+
+            // Obtener las series ya asignadas al torneo
+            List<int> seriesActuales = _torneoDAO.ObtenerSeriesPorTorneo(torneoId);
+
+            // Filtrar las series que ya están permitidas para evitar duplicados
+            var seriesNuevas = seriesIds.Except(seriesActuales).ToList();
+
+            if (!seriesNuevas.Any())
+            {
+                throw new InvalidOperationException("Las series proporcionadas ya están permitidas en este torneo.");
+            }
+
+            // Agregar solo las series nuevas
+            _torneoDAO.AsignarSeriesATorneo(torneoId, seriesNuevas);
         }
         public Torneo? ObtenerTorneoPorId(int id)
         {
@@ -66,16 +105,18 @@ namespace TrabajoFinal.Servicios
         {
             // Validar existencia del torneo
             if (!_torneoDAO.TorneoExiste(torneoId))
-            {
-                throw new InvalidOperationException($"No se encontró el torneo con ID {torneoId}.");
-            }
+                throw new TorneoNoEncontradoException(torneoId);
 
             // Obtener fase actual
             var faseActual = _torneoDAO.ObtenerFaseTorneoPorId(torneoId);
             if (faseActual == TorneoFase.Finalizacion)
-            {
-                throw new InvalidOperationException($"El torneo con ID {torneoId} ya está finalizado.");
-            }
+                throw new TorneoYaFinalizadoException(torneoId);
+
+            // Validar que no haya juegos pendientes
+            var juegosPendientes = _juegoDAO.ObtenerJuegosPendientesPorTorneo(torneoId);
+            if (juegosPendientes.Any())
+                throw new JuegosPendientesException(torneoId);
+
 
             // Determinar nueva fase
             string nuevaFase = faseActual switch
@@ -92,7 +133,7 @@ namespace TrabajoFinal.Servicios
             {
                 throw new InvalidOperationException($"No se pudo avanzar la fase del torneo ID {torneoId}.");
             }
-            // Cuando la nueva fase a enviar sea torneo que ya genere los primeros juegos
+            // Cuando la nueva fase a enviar sea torneo: que ya genere los primeros juegos
             if (nuevaFase == TorneoFase.Torneo)
             {
                 GenerarPrimeraRonda(torneoId);
@@ -124,7 +165,7 @@ namespace TrabajoFinal.Servicios
                     {
                         TorneoId = torneoId,
                         Jugador1Id = jugadores[i].JugadorId,  //jugador de la lista del for
-                        Jugador2Id = jugadores[i + 1].JugadorId, //jugador siguiente al anterior
+                        Jugador2Id = jugadores[i + 1].JugadorId, //jugador siguiente al anterior (for +1)
                         FechaHoraInicio = horaInicio,
                         Estado = "Pendiente"
                     });

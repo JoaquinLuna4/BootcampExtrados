@@ -1,6 +1,7 @@
 using Configuracion;
 using LibraryTrabajoFinal.DAOS;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
@@ -40,6 +41,10 @@ void ConfigureServices(WebApplicationBuilder builder)
     builder.Services.AddScoped<ITorneoJugadorService, TorneoJugadorService>();
     builder.Services.AddScoped<ITorneoJuezService, TorneoJuezService>();
     builder.Services.AddScoped<IJuegoService, JuegoService>();
+    builder.Services.AddScoped<ICartaService, CartaService>();
+    builder.Services.AddScoped<ISerieService, SerieService>();
+
+
     builder.Services.AddScoped<JwtService>();
 
     // Configuración de JWT
@@ -122,18 +127,52 @@ void ConfigureServices(WebApplicationBuilder builder)
 
         return new DAOJuego(connectionString);
     });
+    // Registro del DAO y servicio de Cartas
+    builder.Services.AddScoped<IDAOCarta>(sp =>
+    {
+        var configuration = sp.GetRequiredService<IConfiguration>();
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            throw new InvalidOperationException("La cadena de conexión 'DefaultConnection' no está configurada en appsettings.json.");
+        }
+        return new DAOCarta(connectionString);
+    });
 
+    // Registro del DAO y servicio de Series
+    builder.Services.AddScoped<IDAOSeries>(sp =>
+    {
+        var configuration = sp.GetRequiredService<IConfiguration>();
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            throw new InvalidOperationException("La cadena de conexión 'DefaultConnection' no está configurada en appsettings.json.");
+        }
+        return new DAOSeries(connectionString);
+    });
+    //Registro de DAO TorneoMazo
+    builder.Services.AddScoped<IDAOTorneoMazo>(sp =>
+    {
+        var config = sp.GetRequiredService<IConfiguration>();
+        var connectionString = config.GetConnectionString("DefaultConnection");
+        var logger = sp.GetRequiredService<ILogger<DAOTorneoMazo>>();
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            throw new InvalidOperationException("La cadena de conexión no está configurada");
+        }
+        return new DAOTorneoMazo(connectionString, logger);
+    });
 
 }
 
 
 void ConfigureMiddleware(WebApplication app)
 {
-    //if (app.Environment.IsDevelopment())
-    //{
-    //    app.UseSwagger();
-    //    app.UseSwaggerUI();
-    //}
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
 
     app.UseHttpsRedirection();
     app.UseAuthentication(); // Habilitar autenticación

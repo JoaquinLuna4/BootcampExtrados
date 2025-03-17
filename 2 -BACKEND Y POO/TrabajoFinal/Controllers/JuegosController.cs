@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using TrabajoFinal.Servicios;
+using TrabajoFinal.Servicios.Excepciones;
 
 namespace TrabajoFinal.Controllers
 {
@@ -38,6 +40,38 @@ namespace TrabajoFinal.Controllers
             }
 
             return Ok(juegos);
+        }
+        [Authorize(Roles = "Organizador")]
+        [HttpPut("modificar-emparejamiento")]
+        public IActionResult ModificarEmparejamiento([FromBody] RequestModificarEmparejamiento request)
+        {
+            try
+            {
+                int organizadorId = int.Parse(User.FindFirst(ClaimTypes.Sid)?.Value ?? "0");
+
+                _juegoService.ModificarEmparejamiento(organizadorId,  request.JuegoId, request.NuevoJugador1Id, request.NuevoJugador2Id);
+                return Ok(new { Message = "Emparejamiento modificado correctamente." });
+            }
+            catch (JuegoNoEncontradoException ex)
+            {
+                return NotFound(new { Message = ex.Message });
+            }
+            catch (TorneoNoEncontradoException ex)
+            {
+                return NotFound(new { Message = ex.Message });
+            }
+            catch (AccesoNoAutorizadoException ex)
+            {
+                return Unauthorized(new { Message = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { Message = "Error interno del servidor." });
+            }
         }
 
 

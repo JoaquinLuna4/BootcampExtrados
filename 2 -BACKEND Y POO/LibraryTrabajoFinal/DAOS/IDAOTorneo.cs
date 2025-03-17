@@ -12,6 +12,8 @@ namespace LibraryTrabajoFinal.DAOS
 
         bool AvanzarFase(int torneoId, string nuevaFase);
         bool TorneoExiste(int torneoId);
+        void AsignarSeriesATorneo(int torneoId, List<int> seriesIds);
+        List<int> ObtenerSeriesPorTorneo(int torneoId);
         bool ActualizarTorneo(Torneo torneo);
         bool FinalizarTorneo(int torneoId, int ganadorId);
 

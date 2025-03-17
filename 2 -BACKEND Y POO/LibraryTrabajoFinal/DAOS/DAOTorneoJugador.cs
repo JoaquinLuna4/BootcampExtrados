@@ -17,7 +17,8 @@ namespace LibraryTrabajoFinal.DAOS
         public bool InscribirJugador(int torneoId, int jugadorId, int mazoId)
         {
             using var connection = new MySqlConnection(_connectionString);
-
+            try
+            {
             // Verificamos que el torneo esté en fase de Registro antes de inscribir
             const string verificarTorneo = "SELECT Fase FROM Torneos WHERE Id = @TorneoId AND Eliminado = FALSE";
             var fase = connection.ExecuteScalar<string>(verificarTorneo, new { TorneoId = torneoId });
@@ -29,12 +30,18 @@ namespace LibraryTrabajoFinal.DAOS
 
             // Insertar al jugador en el torneo con su mazo
             const string query = @"
-        INSERT INTO Torneo_Jugadores (TorneoId, JugadorId, MazoId)
-        VALUES (@TorneoId, @JugadorId, @MazoId);";
+                INSERT INTO Torneo_Jugadores (TorneoId, JugadorId, MazoId)
+                VALUES (@TorneoId, @JugadorId, @MazoId);";
 
             int filasAfectadas = connection.Execute(query, new { TorneoId = torneoId, JugadorId = jugadorId, MazoId = mazoId });
 
             return filasAfectadas > 0;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"[ERROR MYSQL] {ex.Message}");
+                throw new Exception($"Error al inscribir jugador {jugadorId} con mazo {mazoId} en el torneo {torneoId}. Detalle: {ex.Message}");
+            }
         }
 
         // Lista de jugadores inscritos en un torneo
@@ -46,6 +53,15 @@ namespace LibraryTrabajoFinal.DAOS
             return connection.Query<TorneoJugador>(query, new { TorneoId = torneoId });
         }
 
+        public bool JugadorEstaInscritoEnTorneo(int torneoId, int jugadorId)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+            const string query = "SELECT COUNT(*) FROM Torneo_Jugadores WHERE TorneoId = @TorneoId AND JugadorId = @JugadorId";
+
+            int count = connection.ExecuteScalar<int>(query, new { TorneoId = torneoId, JugadorId = jugadorId });
+
+            return count > 0;
+        }
         // Desinscribir a un jugador antes del inicio del torneo
         public bool DesinscribirJugador(int torneoId, int jugadorId)
         {

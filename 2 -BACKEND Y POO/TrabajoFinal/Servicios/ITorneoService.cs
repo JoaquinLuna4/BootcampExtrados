@@ -8,6 +8,7 @@ namespace TrabajoFinal.Servicios
     public interface ITorneoService
     {
         int CrearTorneo(RequestCrearTorneo torneo);
+        void AgregarSeriesATorneoExistente(int torneoId, List<int> seriesIds);
         Torneo? ObtenerTorneoPorId(int id);
         IEnumerable<Torneo> ObtenerTodosLosTorneos();
         string ObtenerFaseTorneoId(int id);

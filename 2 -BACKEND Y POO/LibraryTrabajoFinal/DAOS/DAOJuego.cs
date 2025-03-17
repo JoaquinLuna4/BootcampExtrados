@@ -65,6 +65,19 @@ namespace LibraryTrabajoFinal.DAOS
 
             return filasAfectadas > 0;
         }
+        public bool ModificarEmparejamiento(int juegoId, int nuevoJugador1Id, int nuevoJugador2Id)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+            const string query = @"
+                UPDATE Juegos
+                SET Jugador1Id = @NuevoJugador1Id, Jugador2Id = @NuevoJugador2Id
+                WHERE Id = @JuegoId AND Estado = 'Pendiente'";
+
+            int filasAfectadas = connection.Execute(query, new { JuegoId = juegoId, NuevoJugador1Id = nuevoJugador1Id, NuevoJugador2Id = nuevoJugador2Id });
+
+            return filasAfectadas > 0;
+        }
+
         public IEnumerable<Usuario> ObtenerGanadoresPorTorneo(int torneoId)
         {
             using var connection = new MySqlConnection(_connectionString);
@@ -84,7 +97,32 @@ namespace LibraryTrabajoFinal.DAOS
 
             return connection.Query<Juego>(query, new { TorneoId = torneoId });
         }
-        
+        public int ObtenerJuegoIdPorJugador(int torneoId, int jugadorId)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+            const string query = @"
+                SELECT Id FROM Juegos 
+                WHERE TorneoId = @TorneoId 
+                AND (Jugador1Id = @JugadorId OR Jugador2Id = @JugadorId)
+                AND Estado = 'Pendiente'
+                LIMIT 1";
+
+            return connection.ExecuteScalar<int>(query, new { TorneoId = torneoId, JugadorId = jugadorId });
+        }
+        public bool IntercambiarJugador(int juegoId, int nuevoJugadorId, int jugadorAnteriorId)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+            const string query = @"
+                UPDATE Juegos 
+                SET Jugador1Id = CASE WHEN Jugador1Id = @JugadorAnteriorId THEN @NuevoJugadorId ELSE Jugador1Id END,
+                    Jugador2Id = CASE WHEN Jugador2Id = @JugadorAnteriorId THEN @NuevoJugadorId ELSE Jugador2Id END
+                WHERE Id = @JuegoId";
+
+            int filasAfectadas = connection.Execute(query, new { JuegoId = juegoId, NuevoJugadorId = nuevoJugadorId, JugadorAnteriorId = jugadorAnteriorId });
+
+            return filasAfectadas > 0;
+        }
+
     }
 
 }

@@ -36,12 +36,67 @@ public class TorneoJugadorController : ControllerBase
 
             return BadRequest(new { Message = "El torneo ya no está en fase de registro" }); 
         }
-        catch (Exception) // Para cualquier otra excepción
+        catch (JugadorNoPoseeMazoException ex)
         {
-            return StatusCode(500, new { Message = "Error interno del servidor" });
+            return BadRequest(new { Message = ex.Message });
+        }
+        catch (MazoNoValidoParaTorneoException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+        catch (MazoYaAsignadoATorneoException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+        catch (JugadorYaInscriptoException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+        catch (Exception ex) // Para cualquier otra excepción
+        {
+            Console.WriteLine($"[ERROR] {ex.Message}");
+            return StatusCode(500, new { Message = "Error interno del servidor", Error = ex.Message });
         }
 
     }
+
+    [Authorize(Roles = "Jugador")]
+    [HttpPost("{torneoId}/registrar-mazo")]
+    public IActionResult RegistrarMazoEnTorneo(int torneoId, [FromBody] RequestRegistroMazo request)
+    {
+        try
+        {
+            bool registrado = _torneoJugadorService.InscribirJugador(torneoId, request.JugadorId, request.MazoId);
+
+            if (!registrado)
+            {
+                return BadRequest(new { Message = "No se pudo registrar el mazo en el torneo." });
+            }
+
+            return Ok(new { Message = "Mazo registrado correctamente en el torneo." });
+        }
+        catch (FaseRegistroCaducadaException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+        catch (JugadorYaTieneMazoException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+        catch (MazoNoValidoParaTorneoException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+        catch (JugadorYaInscriptoException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new { Message = "Error interno del servidor" });
+        }
+    }
+
 
     // Obtener lista de jugadores inscritos en un torneo
     [Authorize(Roles = "Administrador,Organizador")]

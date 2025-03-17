@@ -85,6 +85,26 @@ namespace LibraryTrabajoFinal.DAOS
             const string query = "SELECT * FROM torneos WHERE Eliminado = FALSE";
             return connection.Query<Torneo>(query);
         }
+        public void AsignarSeriesATorneo(int torneoId, List<int> seriesIds)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+
+            const string query = @"
+        INSERT INTO TorneosSeries (TorneoId, SerieId)
+        VALUES (@TorneoId, @SerieId)";
+
+            foreach (var serieId in seriesIds)
+            {
+                connection.Execute(query, new { TorneoId = torneoId, SerieId = serieId });
+            }
+        }
+        public List<int> ObtenerSeriesPorTorneo(int torneoId)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+            const string query = "SELECT SerieId FROM TorneosSeries WHERE TorneoId = @TorneoId";
+
+            return connection.Query<int>(query, new { TorneoId = torneoId }).ToList();
+        }
         public bool ActualizarTorneo(Torneo torneo)
         {
             using var connection = new MySqlConnection(_connectionString);

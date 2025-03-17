@@ -32,6 +32,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TrabajoFinal.Controllers.CartaController",
+    "Method": "CrearCarta",
+    "RelativePath": "api/cartas/crear",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestCrearCarta",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.CartaController",
+    "Method": "CrearMazo",
+    "RelativePath": "api/cartas/crear-mazo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestCrearMazo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TrabajoFinal.Controllers.JuegosController",
     "Method": "CrearJuego",
     "RelativePath": "api/juegos/crear",
@@ -58,6 +90,80 @@
       {
         "Name": "request",
         "Type": "LibraryTrabajoFinal.DTOS.RequestFinalizarJuego",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.JuegosController",
+    "Method": "ModificarEmparejamiento",
+    "RelativePath": "api/juegos/modificar-emparejamiento",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestModificarEmparejamiento",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.SeriesController",
+    "Method": "CrearSerie",
+    "RelativePath": "api/series",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "serie",
+        "Type": "LibraryTrabajoFinal.Entidades.Serie",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.SeriesController",
+    "Method": "ObtenerTodasLasSeries",
+    "RelativePath": "api/series",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.SeriesController",
+    "Method": "ObtenerSeriePorId",
+    "RelativePath": "api/series/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.SeriesController",
+    "Method": "EliminarSerie",
+    "RelativePath": "api/series/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -143,6 +249,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TorneosController",
+    "Method": "AgregarSeriesATorneo",
+    "RelativePath": "api/torneos/{torneoId}/agregar-series",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "torneoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestAgregarSeries",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TrabajoFinal.Controllers.JuegosController",
     "Method": "ObtenerJuegosPorTorneo",
     "RelativePath": "api/torneos/{torneoId}/juegos",
@@ -161,6 +288,22 @@
   {
     "ContainingType": "TorneosController",
     "Method": "AvanzarFase",
+    "RelativePath": "api/torneos/avanzar-fase/{torneoId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "torneoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TorneosController",
+    "Method": "AvanzarRonda",
     "RelativePath": "api/torneos/avanzar-ronda/{torneoId}",
     "HttpMethod": "POST",
     "IsController": true,
@@ -233,6 +376,27 @@
       {
         "Name": "torneoId",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TorneoJugadorController",
+    "Method": "RegistrarMazoEnTorneo",
+    "RelativePath": "api/torneos/jugadores/{torneoId}/registrar-mazo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "torneoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestRegistroMazo",
         "IsRequired": true
       }
     ],

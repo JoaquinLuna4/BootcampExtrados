@@ -1,0 +1,33 @@
+.max-width-65{
+    max-width: 65%;
+}
+.about-p{
+    text-align: left;
+    margin: auto;
+}
+.social-links-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15vw;
+   
+}
+
+.social-link img {
+    width: 50px; 
+    height: 50px; 
+    margin-bottom: 5px; 
+    border-radius: 5px; 
+  }
+.social-link{
+    text-decoration: none;
+    color: beige;
+}
+.social-link:hover{
+    text-decoration: none;
+    color: rgb(82, 82, 78);
+}
+.about-button{
+        color: #fafafa;
+        border-color: #fafafa;
+        margin-bottom: 3em ;
+}

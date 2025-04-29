@@ -1,0 +1,36 @@
+
+.section-container{
+    padding-top: 5em;
+    padding: 5em 2em 0em 2em  ;
+}
+
+.articulo-container {
+    border: 1px solid #ddd; 
+    margin-bottom: 20px; 
+    padding: 15px; 
+    border-radius: 8px;
+    background-color: #473f3f; 
+  }
+  .articulo-header{
+    text-align: center;
+  }
+
+  .articulo-titulo {
+    font-size: 1.5em; 
+    margin-top: 0; 
+    margin-bottom: 10px; 
+    color: #ffffff; 
+  }
+  
+  .articulo-descripcion {
+    font-size: 1em; 
+    color: #fcfcfc; 
+    line-height: 1.6;
+  }
+  .articulo-imagen{
+    width: 30vh;
+  }
+  .articulo-body{
+    display: flex;
+    flex-direction: row;
+  }

@@ -29,14 +29,14 @@ function App() {
 			.then((response) => {
 				console.log(response, "response axios");
 
-				setDogImage(response.data.message);
+				setDogImage(response.data.message); //Consultar sobre desestructuración de esto
 				setIsLoading(false);
 			})
 			.catch((error) => {
 				setError(error);
 				setIsLoading(false);
 			});
-	}, []);
+	}, [isLoading]);
 	console.log(dogImage, "dogImage en axios");
 	console.log(error, "error en axios");
 
@@ -44,6 +44,30 @@ function App() {
 	const getRandomImg = () => {
 		setIsLoading(true);
 	};
+
+	/*  --- Logica de extraccion de datos de raza por url ---  */
+	function extraerRazaDeUrlConSplit(url) {
+		try {
+			const parts = url.split("/");
+			// Buscamos el índice donde está 'breeds'
+			const breedsIndex = parts.indexOf("breeds");
+
+			// Si 'breeds' existe y no es la penúltima parte...
+			if (breedsIndex > -1 && breedsIndex < parts.length - 2) {
+				// La raza está en la(s) parte(s) siguiente(s) a 'breeds',
+				// hasta la penúltima parte (que es el nombre de archivo).
+				// Usamos slice para obtener esas partes y join para unirlas si hay sub-razas.
+				const breedParts = parts.slice(breedsIndex + 1, parts.length - 1);
+				return breedParts.join("-"); // Une "terrier", "american" con un guión si fuera el caso
+			} else {
+				return null; // No se encontró el patrón esperado
+			}
+		} catch (error) {
+			console.error("Error al procesar la URL con split:", error);
+			return null;
+		}
+	}
+
 	return (
 		<>
 			<header>
@@ -56,13 +80,19 @@ function App() {
 				<p className="presentation">The current randoms breeds are: </p>
 				{isLoading ? (
 					<h2>Loading ... </h2>
+				) : error ? (
+					<h2>Error</h2>
 				) : (
 					<ul>
-						{dogImage.map((img) => (
-							<li key={img}>
-								<img src={img} className="random-image center"></img>
-							</li>
-						))}
+						{dogImage.map((img) => {
+							const raza = extraerRazaDeUrlConSplit(img);
+							return (
+								<li key={img}>
+									<p className="center mb-3">This is a copy of: {raza}</p>
+									<img src={img} className="random-image center"></img>
+								</li>
+							);
+						})}
 					</ul>
 				)}
 

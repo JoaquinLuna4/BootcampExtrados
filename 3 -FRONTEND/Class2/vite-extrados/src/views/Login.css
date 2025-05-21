@@ -1,0 +1,60 @@
+.login-container {
+    display: flex
+;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2rem 3rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    max-width: 364px;
+    margin: 60px auto;
+}
+
+.login-container h2 {
+    margin-bottom: 1.5rem;
+    color: #22223b;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+.login-container button {
+    padding: 0.7rem 2.2rem;
+    background: linear-gradient(90deg, #4f8cff 0%, #6dd5ed 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(79,140,255,0.08);
+}
+
+.login-container button:hover {
+    background: linear-gradient(90deg, #6dd5ed 0%, #4f8cff 100%);
+    transform: translateY(-2px) scale(1.04);
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    max-width: 98vw;
+    padding: 1rem 0.5rem;
+    margin: 30px auto;
+    min-height: 60vh;
+    border-radius: 10px;
+  }
+  .login-container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .login-container button {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+    width: 100%;
+  }
+}
+

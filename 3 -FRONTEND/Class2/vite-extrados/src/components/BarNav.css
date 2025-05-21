@@ -10,42 +10,71 @@ nav {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 1em;
   border: 2px solid #000;
-  }
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  overflow-x: hidden;
+}
   
-  nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  
-  nav ul li {
-    margin: 0 15px;
-  }
-  
-  nav ul li a {
-    text-decoration: none;
-    color: #333;
-  }
-  
-  nav ul li a:hover {
-    color: #007bff; /* Ejemplo de estilo al pasar el ratón */
-  }
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+nav ul li a:hover {
+  color: #007bff; 
+}
+.navbar-button {
+  background-color: transparent; 
+  color: #333;
+  box-shadow:  4px 4px 4px rgb(1,1,1);
+  border: 1px solid #333;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.navbar-button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.logout-btn {
+  background: linear-gradient(90deg, #ff5858 0%, #f09819 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 88, 88, 0.08);
+}
+
+.logout-btn:hover {
+  background: linear-gradient(90deg, #f09819 0%, #ff5858 100%);
+  transform: translateY(-2px) scale(1.04);
+}
+@media (max-width: 600px) {
+  nav{
+    width: 93%;
+  }
   .navbar-button {
-    background-color: transparent; 
-    color: #333;
-    box-shadow:  4px 4px 4px rgb(1,1,1);
-    border: 1px solid #333;
-    padding: 8px 15px;
-    border-radius: 5px;
     font-size: 1rem;
-    
+    padding: 0.4rem 0.4rem;
   }
-  
-  .navbar-button:hover {
-    background-color: #333;
-    color: #fff;
-  }
+ 
+}

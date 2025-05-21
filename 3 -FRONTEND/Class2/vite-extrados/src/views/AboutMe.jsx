@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./AboutMe.css";
-
+import { ContactForm } from "../components/ContactForm";
 export default function AboutMe() {
 	const [Opciones, setOpciones] = useState(0);
-	console.log(Opciones, "esto es opciones");
 
 	const toggleOpciones = () => {
 		if (Opciones === 0) {
@@ -35,8 +34,9 @@ export default function AboutMe() {
 				</p>
 			</section>
 			<section>
+				<ContactForm />
 				<h2 className="center p-40">
-					Podes contactarme por los siguientes links:
+					Tambien podes contactarme por los siguientes links:
 				</h2>
 				<button className="center about-button " onClick={toggleOpciones}>
 					Ver/Ocultar Opciones

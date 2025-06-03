@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\datos\datos.csproj" />
+    <ProjectReference Include="..\datos\datos.csproj" />
   </ItemGroup>
 
 </Project>

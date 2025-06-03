@@ -209,7 +209,9 @@ namespace TrabajoFinal.Controllers
         }
 
         // DELETE: api/usuarios/{id}
-        [HttpDelete("{id}")]    ///falta implementar borrado logico
+        [Authorize(Roles = "Administrador,Organizador")]
+
+        [HttpDelete("{id}")]    
         public IActionResult DeleteUser(int id)
         {
             try

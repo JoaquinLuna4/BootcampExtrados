@@ -1,5 +1,5 @@
 using API_CRUD.Services;
-using datos.Entidades;
+using LibraryTrabajoFinal.Entidades;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_CRUD.Controllers

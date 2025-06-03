@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\TrabajoFinal.csproj": {}
+    "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\TrabajoFinal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj": {
+    "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj",
         "projectName": "Configuracion",
-        "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj",
+        "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj": {
+    "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj",
         "projectName": "LibraryTrabajoFinal",
-        "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj",
+        "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -144,14 +144,14 @@
         }
       }
     },
-    "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\TrabajoFinal.csproj": {
+    "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\TrabajoFinal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\TrabajoFinal.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\TrabajoFinal.csproj",
         "projectName": "TrabajoFinal",
-        "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\TrabajoFinal.csproj",
+        "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\TrabajoFinal.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -172,11 +172,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj": {
-                "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj"
+              "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj": {
+                "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj"
               },
-              "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj": {
-                "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj"
+              "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj": {
+                "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj"
               }
             }
           }
@@ -208,6 +208,10 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.3.0, )"
             },
             "Microsoft.Extensions.Identity.Core": {
               "target": "Package",

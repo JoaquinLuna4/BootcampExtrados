@@ -11,6 +11,21 @@ using TrabajoFinal.Servicios;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Configuración de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder
+            .WithOrigins("http://localhost:5173") // <-- Url del frontend
+                                                  // Para permitir múltiples orígenes: .WithOrigins("http://localhost:5173", "http://otrodominio.com")
+                                                  // Para permitir CUALQUIER origen (NO RECOMENDADO PARA PRODUCCIÓN): .AllowAnyOrigin()
+            .AllowAnyMethod()                     // Permite todos los métodos HTTP (GET, POST, PUT, DELETE, OPTIONS, etc.)
+            .AllowAnyHeader()                     // Permite todos los encabezados HTTP en las solicitudes
+            .AllowCredentials());                   // Permite el envío de credenciales (cookies, encabezados de autorización, etc.)
+                                                    // Esto es crucial si estás usando autenticación basada en cookies o si pasas tokens de forma personalizada.
+});
+
+
 // Configuración de Servicios
 ConfigureServices(builder);
 
@@ -174,6 +189,7 @@ void ConfigureMiddleware(WebApplication app)
         app.UseSwaggerUI();
     }
 
+    app.UseCors("AllowSpecificOrigin"); //Habilitamos el uso de CORS
     app.UseHttpsRedirection();
     app.UseAuthentication(); // Habilitar autenticación
     app.UseAuthorization(); // Habilitar autorización

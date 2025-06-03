@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj": {}
+    "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj": {
+    "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj",
         "projectName": "LibraryTrabajoFinal",
-        "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj",
+        "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\LibraryTrabajoFinal.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\LibraryTrabajoFinal\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

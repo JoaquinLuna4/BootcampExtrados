@@ -1,17 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using datos.Entidades;
-using datos.DAOs;
-using MySqlConnector;
-using Dapper;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Text.RegularExpressions;
+using LibraryTrabajoFinal.Entidades;
 using APIclase.Servicios;
 
 
 
 namespace APIclase.Controllers
 {
-     
+
 
     [ApiController]
     [Route("api/[controller]")]
@@ -64,6 +59,8 @@ namespace APIclase.Controllers
                 throw new Exception("El correo no es dominio gmail o no tiene 14 años");
             }
         }
+
+
     }
 }
         

@@ -1,6 +1,6 @@
 using APIAutorizacionAutenticacion.Services;
 using Configuracion;
-using datos.Entidades;
+using LibraryTrabajoFinal.Entidades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -13,7 +13,7 @@ using System.Xml.Linq;
 namespace APIAutorizacionAutenticacion.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
 

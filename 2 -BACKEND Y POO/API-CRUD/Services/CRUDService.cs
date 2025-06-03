@@ -1,6 +1,6 @@
 ﻿
-using datos.DAOS;
-using datos.Entidades;
+using LibraryTrabajoFinal.DAOS;
+using LibraryTrabajoFinal.Entidades;
 using Konscious.Security.Cryptography;
 using System.Text;
 
@@ -23,7 +23,7 @@ namespace API_CRUD.Services
 
         public UsuariosCRUD ObtenerUsuarioPublico(string nombre)
         { 
-            var usuario = objeto1.GetUserByNombre(nombre);
+            var usuario = objeto1.SearchUser(nombre);
             if (usuario == null) throw new Exception("Usuario es null en esta instancia");
             return usuario;
         }

@@ -1,5 +1,5 @@
-﻿    using datos.DAOs;
-    using datos.Entidades;
+﻿    using LibraryTrabajoFinal.DAOs;
+    using LibraryTrabajoFinal.Entidades;
 
 
 namespace APIclase.Servicios

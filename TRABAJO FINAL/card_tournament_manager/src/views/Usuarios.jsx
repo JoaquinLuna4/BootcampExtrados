@@ -17,6 +17,9 @@ export const Usuarios = () => {
 
 	const token = useSelector((state) => state.auth.token);
 	console.log(token, "este es el token");
+	const userPAYLOAD = useSelector((state) => state.auth.user);
+
+	console.log(userPAYLOAD, "este es el usuario");
 
 	const isLoggedIn = !!token;
 

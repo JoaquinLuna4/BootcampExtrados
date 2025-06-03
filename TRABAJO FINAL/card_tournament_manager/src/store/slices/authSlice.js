@@ -3,8 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const authSlice = createSlice({
 	name: "auth",
 	initialState: {
-		token: null,
-		user: null,
+		token: localStorage.getItem("authToken") || null, //pone el valor del localstorage primero y si no es null
+		user: localStorage.getItem("authUser")
+			? JSON.parse(localStorage.getItem("authUser"))
+			: null,
 		status: "empty",
 		error: null,
 	},
@@ -14,11 +16,12 @@ const authSlice = createSlice({
 			//El payload es la información relevante que viene como un objeto del Login
 			//Es lo que estoy enviando como {token, user}
 
-			state.token = action.payload.token;
-			state.user = action.payload.user || null; // Guarda info del usuario si viene en el payload
+			state.token = action.payload.token; // Acceder a .data.token
+			state.user = action.payload.usuario; // Acceder a .data.usuario
 			state.status = "succeeded";
 			state.error = null;
-			localStorage.setItem("authToken", action.payload.token); // Persistir en localStorage
+			localStorage.setItem("authToken", action.payload.token); // lo hace persistir en localStorage
+			localStorage.setItem("authUser", JSON.stringify(action.payload.usuario)); // lo hace persistir a usuario en localStorage
 		},
 		// Metodo para el logout
 		logout: (state) => {

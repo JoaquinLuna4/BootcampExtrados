@@ -22,7 +22,6 @@ const settings = ["Profile", "Account", "Dashboard", "Login"];
 if (isAuthenticated()) {
 	// Si el usuario está autenticado, muestra el botón de Logout
 	settings.push("Logout");
-	console.log(settings, "Aqui el settings");
 }
 
 function ResponsiveAppBar() {

@@ -21,8 +21,8 @@ function AppRoutes() {
 						<ProtectedRoute element={<Proyectos Titles={ProyectsTitles} />} />
 					}
 				/>
-				<Route path="/login" element={<Login />} />
 			</Route>
+			<Route path="/login" element={<Login />} />
 		</Routes>
 	);
 }

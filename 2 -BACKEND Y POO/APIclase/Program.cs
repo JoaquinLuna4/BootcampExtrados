@@ -1,4 +1,4 @@
-using datos.Entidades;
+using LibraryTrabajoFinal.Entidades;
 using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);

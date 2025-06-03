@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj",
       "projectName": "Configuracion",
-      "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj",
+      "projectPath": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\Configuracion.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\obj\\",
+      "outputPath": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Configuracion\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

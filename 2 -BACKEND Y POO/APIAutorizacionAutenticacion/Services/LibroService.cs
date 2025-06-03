@@ -1,6 +1,6 @@
 ﻿
-using datos.DAOS;
-using datos.Entidades;
+using LibraryTrabajoFinal.DAOS;
+using LibraryTrabajoFinal.Entidades;
 
 namespace APIAutorizacionAutenticacion.Services
 {

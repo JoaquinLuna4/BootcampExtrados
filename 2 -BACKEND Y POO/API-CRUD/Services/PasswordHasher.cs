@@ -1,5 +1,4 @@
-﻿using datos.DAOS;
-using Konscious.Security.Cryptography;
+﻿using Konscious.Security.Cryptography;
 using System.Text;
 
 namespace API_CRUD.Services

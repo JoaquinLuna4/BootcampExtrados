@@ -1,14 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\",
+  "WorkspaceRootPath": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8CC62031-1233-40D7-AAF2-1F25E5196D5C}|Ejercicio3\\Ejercicio3.csproj|c:\\users\\usuario\\joaco\\programing\\bootcamp extrados\\2 -backend y poo\\ejercicio3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CC62031-1233-40D7-AAF2-1F25E5196D5C}|Ejercicio3\\Ejercicio3.csproj|solutionrelative:ejercicio3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3DF213F0-4471-4D16-A432-8665DC7C421B}|TrabajoFinal\\TrabajoFinal.csproj|c:\\users\\usuario\\joaco\\programing\\2_estudios\\bootcamp extrados\\2 -backend y poo\\trabajofinal\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DF213F0-4471-4D16-A432-8665DC7C421B}|TrabajoFinal\\TrabajoFinal.csproj|solutionrelative:trabajofinal\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CC62031-1233-40D7-AAF2-1F25E5196D5C}|Ejercicio3\\Ejercicio3.csproj|c:\\users\\usuario\\joaco\\programing\\bootcamp extrados\\2 -backend y poo\\ejercicio3\\bdconnection\\daos\\daousuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CC62031-1233-40D7-AAF2-1F25E5196D5C}|Ejercicio3\\Ejercicio3.csproj|solutionrelative:ejercicio3\\bdconnection\\daos\\daousuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3DF213F0-4471-4D16-A432-8665DC7C421B}|TrabajoFinal\\TrabajoFinal.csproj|c:\\users\\usuario\\joaco\\programing\\2_estudios\\bootcamp extrados\\2 -backend y poo\\trabajofinal\\servicios\\ijuegoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DF213F0-4471-4D16-A432-8665DC7C421B}|TrabajoFinal\\TrabajoFinal.csproj|solutionrelative:trabajofinal\\servicios\\ijuegoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,33 +18,44 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:5:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Ejercicio3\\Program.cs",
-              "RelativeDocumentMoniker": "Ejercicio3\\Program.cs",
-              "ToolTip": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Ejercicio3\\Program.cs*",
-              "RelativeToolTip": "Ejercicio3\\Program.cs*",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAzAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\Program.cs",
+              "RelativeDocumentMoniker": "TrabajoFinal\\Program.cs",
+              "ToolTip": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\Program.cs",
+              "RelativeToolTip": "TrabajoFinal\\Program.cs",
+              "ViewState": "AgIAAKMAAAAAAAAAAAAkwL8AAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T21:28:44.78Z",
+              "WhenOpened": "2025-03-17T19:11:40.078Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DAOUsuarios.cs",
-              "DocumentMoniker": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Ejercicio3\\bdconnection\\DAOs\\DAOUsuarios.cs",
-              "RelativeDocumentMoniker": "Ejercicio3\\bdconnection\\DAOs\\DAOUsuarios.cs",
-              "ToolTip": "C:\\Users\\Usuario\\JOACO\\Programing\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\Ejercicio3\\bdconnection\\DAOs\\DAOUsuarios.cs*",
-              "RelativeToolTip": "Ejercicio3\\bdconnection\\DAOs\\DAOUsuarios.cs*",
-              "ViewState": "AgIAABgAAAAAAAAAAAAuwCYAAABaAAAAAAAAAA==",
+              "Title": "IJuegoService.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\Servicios\\IJuegoService.cs",
+              "RelativeDocumentMoniker": "TrabajoFinal\\Servicios\\IJuegoService.cs",
+              "ToolTip": "C:\\Users\\Usuario\\JOACO\\Programing\\2_ESTUDIOS\\BOOTCAMP EXTRADOS\\2 -BACKEND Y POO\\TrabajoFinal\\Servicios\\IJuegoService.cs",
+              "RelativeToolTip": "TrabajoFinal\\Servicios\\IJuegoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T20:36:48.775Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-16T13:40:39.302Z"
             }
           ]
         }

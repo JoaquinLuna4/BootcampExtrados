@@ -1,9 +1,9 @@
-﻿using Ejercicio3.bdconnection.DAOs;
+﻿using APIclase.bdconnection.DAOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ejercicio3
+namespace APIclase
 {
     class Program
     {
@@ -13,10 +13,14 @@ namespace Ejercicio3
             
             //Crear Usuario
             
-            daoUsuarios.CreateUser(109, "Pablo", 32);
+           // daoUsuarios.CreateUser(109, "Pablo", 32);
+
+            // Actualizar un usuario por ID
+
+            daoUsuarios.UpdateUserByID(108, "Pedro", 35, false);
 
             // Mostrar todos los usuarios activos
-          
+
             var usuarios = daoUsuarios.GetAllUsers();
             Console.WriteLine("Lista de Usuarios:");
             foreach (var usuario in usuarios)
@@ -37,13 +41,11 @@ namespace Ejercicio3
                 Console.WriteLine($"No se encontró usuario con {edad} años");
             }
 
-           // Actualizar un usuario por ID
-
-            daoUsuarios.UpdateUserByID(104, "Marcos", 31, false);
+          
 
            //Eliminar de manera logica un usuario por ID
 
-            daoUsuarios.DeleteUserByID(104);
+            //daoUsuarios.DeleteUserByID(104);
         }
     }
 }

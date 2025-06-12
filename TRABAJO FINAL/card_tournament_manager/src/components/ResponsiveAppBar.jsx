@@ -39,16 +39,6 @@ function ResponsiveAppBar() {
 	//Llamo a mi hook personalizado para validar si está autenticado
 	const isAuth = useIsAuth();
 
-	// //Logica para manejar login/logout
-	// const handleAuthAction = (action) => {
-	// 	if (action === "Login") {
-	// 		navigate("/login");
-	// 	} else if (action === "Logout") {
-	// 		dispatch(logout());
-	// 		navigate("/login");
-	// 	}
-	// };
-
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
 	};
@@ -76,7 +66,7 @@ function ResponsiveAppBar() {
 					<TbCards
 						sx={{
 							display: { xs: "none", md: "flex" },
-							mr: 100,
+
 							color: theme.palette.secondary.main,
 						}}
 					/>{" "}
@@ -126,7 +116,13 @@ function ResponsiveAppBar() {
 							sx={{ display: { xs: "block", md: "none" } }}
 						>
 							{pages.map((page) => (
-								<MenuItem key={page.title} onClick={handleCloseNavMenu}>
+								<MenuItem
+									key={page.title}
+									onClick={() => {
+										handleCloseNavMenu();
+										navigate(page.path);
+									}}
+								>
 									<Typography sx={{ textAlign: "center" }}>
 										{page.title}
 									</Typography>
@@ -137,7 +133,7 @@ function ResponsiveAppBar() {
 					<AdbIcon
 						sx={{
 							display: { xs: "flex", md: "none" },
-							mr: 100,
+
 							color: theme.palette.primary.main,
 						}}
 					/>

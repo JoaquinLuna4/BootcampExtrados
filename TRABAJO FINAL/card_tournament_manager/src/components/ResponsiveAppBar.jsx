@@ -15,8 +15,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useTheme } from "@mui/material/styles"; // Importa useTheme
 import { useNavigate, Link } from "react-router-dom";
 import useIsAuth from "../utils/hooks/useIsAuth";
-import { useDispatch } from "react-redux";
-import { logout } from "../store/slices/authSlice";
+import useAuthActions from "../utils/hooks/handleAuthAction";
 
 import { TbCards } from "react-icons/tb";
 
@@ -35,20 +34,20 @@ function ResponsiveAppBar() {
 	const theme = useTheme();
 
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
+	const { handleAuthAction } = useAuthActions();
 
 	//Llamo a mi hook personalizado para validar si está autenticado
 	const isAuth = useIsAuth();
 
-	//Logica para manejar login/logout
-	const handleAuthAction = (action) => {
-		if (action === "Login") {
-			navigate("/login");
-		} else if (action === "Logout") {
-			dispatch(logout());
-			navigate("/login");
-		}
-	};
+	// //Logica para manejar login/logout
+	// const handleAuthAction = (action) => {
+	// 	if (action === "Login") {
+	// 		navigate("/login");
+	// 	} else if (action === "Logout") {
+	// 		dispatch(logout());
+	// 		navigate("/login");
+	// 	}
+	// };
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);

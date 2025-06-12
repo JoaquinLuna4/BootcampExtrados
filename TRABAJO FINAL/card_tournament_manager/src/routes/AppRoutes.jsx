@@ -8,6 +8,7 @@ import { Success } from "../views/Success";
 import { CreateUser } from "../views/CreateUser";
 import { Users } from "../views/Users";
 import { MyDecks } from "../views/MyDecks";
+import { Profile } from "../views/Profile";
 
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -21,6 +22,7 @@ function AppRoutes() {
 				<Route path="/cards" element={<Cards />} />
 				<Route path="/selected-cards" element={<CardAsign />} />
 				<Route path="/my-decks" element={<MyDecks />} />
+				<Route path="/profile" element={<Profile />} />
 			</Route>
 			<Route path="/success" element={<Success />} />
 			<Route path="/login" element={<Login />} />

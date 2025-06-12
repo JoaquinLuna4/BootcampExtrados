@@ -16,6 +16,8 @@ import {
 	Container,
 	Paper,
 } from "@mui/material";
+import PasswordInput from "../components/PasswordInput";
+
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -106,13 +108,12 @@ function LoginForm() {
 						autoComplete="alias"
 						autoFocus
 					/>
-					<TextField
+					<PasswordInput
 						margin="normal"
 						required
 						fullWidth
 						name="enteredPass"
 						label="Contraseña"
-						type="password"
 						id="enteredPass"
 						autoComplete="current-enteredPass"
 					/>

@@ -19,12 +19,23 @@ export default function CardItem({ card, isSelected, onSelect }) {
 	const handleToggleSelect = () => {
 		onSelect(card.id, !isSelected); // Notifica al padre el ID de la carta y el nuevo estado de selección
 	};
-	console.log(card, "esto es una card");
 
 	return (
 		<>
 			<Card key={card.id} sx={{ maxWidth: 345 }}>
 				<CardActionArea>
+					<CardActions sx={{ justifyContent: "space-between" }}>
+						{/* <Button size="small" color="primary">
+						Ver Detalles
+					</Button> */}
+						<FormControlLabel
+							control={
+								<Checkbox checked={isSelected} onChange={handleToggleSelect} />
+							}
+							label="Seleccionar"
+							labelPlacement="end"
+						/>
+					</CardActions>
 					<CardMedia
 						component="img"
 						height="440"
@@ -55,18 +66,6 @@ export default function CardItem({ card, isSelected, onSelect }) {
 						/>
 					</CardContent>
 				</CardActionArea>
-				<CardActions sx={{ justifyContent: "space-between" }}>
-					<Button size="small" color="primary">
-						Ver Detalles
-					</Button>
-					<FormControlLabel
-						control={
-							<Checkbox checked={isSelected} onChange={handleToggleSelect} />
-						}
-						label="Seleccionar"
-						labelPlacement="end"
-					/>
-				</CardActions>
 			</Card>
 		</>
 	);

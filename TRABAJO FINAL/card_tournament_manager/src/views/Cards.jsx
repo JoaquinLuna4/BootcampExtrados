@@ -12,6 +12,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import CircularProgress from "@mui/material/CircularProgress";
+import Snackbar from "@mui/material/Snackbar";
 
 import { useNavigate } from "react-router";
 
@@ -27,6 +28,10 @@ const Cards = () => {
 
 	// ---------- State para almacenar los IDs de las cartas seleccionadas -----------------
 	const [selectedCardIds, setSelectedCardIds] = useState([]);
+
+	// Estado para el mensaje de snackbar cuando se repita la carta
+	const [snackbarOpen, setSnackbarOpen] = useState(false);
+	const [snackbarMessage, setSnackbarMessage] = useState("");
 
 	useEffect(() => {
 		const fetchCards = async () => {
@@ -60,16 +65,29 @@ const Cards = () => {
 			}
 		});
 	};
-	const handleContinue = () => {
-		// Agrega las validaciones de 8-15 cartas aquí también
+	const handleContinue = (cardId) => {
+		// Agrego las validaciones de 8-15 cartas aca también
 		if (selectedCardIds.length < 8 || selectedCardIds.length > 15) {
 			alert(
 				`Debes seleccionar entre 8 y 15 cartas. Actualmente tienes ${selectedCardIds.length}.`
 			);
 			return;
 		}
+		if (selectedCardIds.includes(cardId)) {
+			setSnackbarMessage("Esta carta ya está seleccionada.");
+			setSnackbarOpen(true);
+			return;
+		}
 		// Redirige a la nueva página, pasando los IDs seleccionados como state
 		navigate("/selected-cards", { state: { selectedCardIds } });
+	};
+
+	//// --- para cerrar el snackbar --- -- - ////
+	const handleCloseSnackbar = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+		setSnackbarOpen(false);
 	};
 
 	///////////------------- Validaciones de errores UX   -------------//////////
@@ -140,7 +158,7 @@ const Cards = () => {
 						columns={{ xs: 4, sm: 8, md: 12 }}
 					>
 						{cards.map((card) => (
-							<Grid item xs={4} sm={4} md={3} key={card.id}>
+							<Grid sx={{ xs: 4, sm: 4, md: 3 }} key={card.id}>
 								<CardItem
 									card={card}
 									isSelected={selectedCardIds.includes(card.id)}
@@ -156,6 +174,13 @@ const Cards = () => {
 							cards={cards}
 							isSelected={selectedCardIds}
 							onSelect={handleCardSelection}
+						/>
+						<Snackbar
+							open={snackbarOpen}
+							autoHideDuration={3000} // Se cierra automáticamente después de 3 segundos
+							onClose={handleCloseSnackbar}
+							message={snackbarMessage}
+							anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 						/>
 					</Grid>
 				)}

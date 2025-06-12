@@ -16,6 +16,8 @@ import {
 import { isValidEmail } from "../utils/isValidMail";
 import { isValidPassword } from "../utils/isValidPass";
 
+import PasswordInput from "../components/PasswordInput";
+
 import axios from "axios"; // Acá mantengo axios solo por isAxiosError para determinar si es un ninconveniente de axios
 
 import {
@@ -257,18 +259,18 @@ export const CreateUser = () => {
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
-					<TextField
+					<PasswordInput
 						margin="normal"
 						required
 						fullWidth
 						name="password"
 						label="Contraseña"
-						type="password"
 						id="password"
 						autoComplete="new-password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
+
 					<TextField
 						margin="normal"
 						fullWidth

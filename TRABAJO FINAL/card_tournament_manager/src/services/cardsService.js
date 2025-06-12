@@ -22,6 +22,6 @@ export const getCardDetailsByIds = async (cardIds) => {
 	return response.data;
 };
 export const getCardsOfDeck = async (mazoId) => {
-	const response = await apiClient.get(`/cartas/Mazos/${mazoId}/Cartas`);
+	const response = await apiClient.get(`/cartas/${mazoId}/Cartas`);
 	return response.data;
 };

@@ -17,6 +17,8 @@ import ExpandIcon from "@mui/icons-material/Expand";
 import { useNavigate } from "react-router-dom";
 import { getDecksByUserId } from "../services/cardsService";
 import { getCardsOfDeck } from "../services/cardsService";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 
 export const MyDecks = () => {
 	const [myDecks, setMyDecks] = useState([]);
@@ -146,17 +148,11 @@ export const MyDecks = () => {
 										</Typography>
 									) : (
 										expandedMazoId === mazo.id && (
-											<Grid container spacing={2}>
+											<List>
 												{currentDeckCards.map((card) => (
-													<Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
-														<CardItem
-															card={card}
-															isSelected={false} // Las cartas en el mazo no están "seleccionadas"
-															onSelect={() => {}} // No hay acción de selección aquí
-														/>
-													</Grid>
+													<ListItem key={card.id}>{card.nombre}</ListItem>
 												))}
-											</Grid>
+											</List>
 										)
 									)}
 								</AccordionDetails>

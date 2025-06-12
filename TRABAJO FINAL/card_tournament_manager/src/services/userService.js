@@ -34,3 +34,7 @@ export const getUsers = async () => {
 	const response = await apiClient.get(`/Usuarios/listar`);
 	return response.data;
 };
+export const getProfile = async () => {
+	const response = await apiClient.get(`/Usuarios/mi-perfil`);
+	return response.data;
+};

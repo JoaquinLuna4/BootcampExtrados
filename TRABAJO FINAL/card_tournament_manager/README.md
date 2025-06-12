@@ -10,6 +10,12 @@ Aplicación web para la gestión de torneos de cartas, desarrollada con React, V
 - Interfaz moderna y responsiva usando Material UI.
 - Tema claro personalizado.
 - Arquitectura modular con rutas, servicios, slices y componentes reutilizables.
+- Consumo centralizado de API mediante `apiClient`.
+- Servicios específicos como `cardsService` y `userService` para la lógica de negocio.
+- Interceptores de Axios para manejo automático de tokens.
+- Almacenamiento seguro de sesión en localStorage.
+- Vistas principales: Home, Login, MyDecks, CreateUser y Usuarios.
+- Estructura escalable para agregar nuevas funcionalidades y vistas.
 
 ## Estructura del proyecto
 
@@ -28,13 +34,13 @@ Aplicación web para la gestión de torneos de cartas, desarrollada con React, V
 │   │   ├── Layout.jsx
 │   │   ├── Navbar.jsx
 │   │   └── ResponsiveAppBar.jsx
-│   ├── interceptors/
-│   │   └── axios.interceptor.jsx
+│   ├── services/
+│   │   ├── cardsService.js
+│   │   ├── userService.js
+│   │   └── apiClient.js
 │   ├── routes/
 │   │   ├── AppRoutes.jsx
 │   │   └── ProtectedRoute.jsx
-│   ├── services/
-│   │   └── getUsers.service.jsx
 │   ├── store/
 │   │   ├── store.js
 │   │   └── slices/
@@ -42,10 +48,20 @@ Aplicación web para la gestión de torneos de cartas, desarrollada con React, V
 │   ├── themes/
 │   │   └── lightTheme.js
 │   ├── utils/
-│   │   └── Authenticated.js
+│   │   └── isValidMail.js
+│   │   └── isValidPass.js
+│   │   └── hooks/
+│   │       ├── handleAuthAction.js
+│   │       └── useIsAuth.js
 │   └── views/
 │       ├── Home.jsx
 │       ├── Login.jsx
+│       ├── MyDecks.jsx
+│       ├── CardAsign.jsx
+│       ├── Cards.jsx
+│       ├── CreateUser.jsx
+│       ├── Profile.jsx
+│       ├── Success.jsx
 │       └── Usuarios.jsx
 ├── .env
 ├── package.json
@@ -56,13 +72,12 @@ Aplicación web para la gestión de torneos de cartas, desarrollada con React, V
 - `public/`: Archivos estáticos como favicon y robots.txt.
 - `src/`: Código fuente de la aplicación.
   - `components/`: Componentes reutilizables de la UI (Navbar, Footer, Layout, etc).
-  - `interceptors/`: Interceptores de Axios para manejo de tokens.
   - `routes/`: Definición de rutas y rutas protegidas.
   - `services/`: Servicios para llamadas a la API.
   - `store/`: Configuración de Redux Toolkit y slices.
   - `themes/`: Temas de Material UI.
-  - `utils/`: Utilidades como validación de autenticación.
-  - `views/`: Vistas principales (Home, Login, Usuarios).
+  - `utils/`: Utilidades como validación de autenticación y validaciones de formularios.
+  - `views/`: Vistas principales (Home, Login, Usuarios, MyDecks).
 
 ## Scripts disponibles
 
@@ -78,6 +93,7 @@ Aplicación web para la gestión de torneos de cartas, desarrollada con React, V
 - Rutas protegidas según autenticación.
 - Interfaz responsiva y moderna con Material UI.
 - Arquitectura escalable y modular.
+- Separación clara de responsabilidades por carpetas.
 
 ## Tecnologías principales
 

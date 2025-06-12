@@ -7,8 +7,6 @@ export const GridTable = ({
 	pageSizeOptions,
 	sx,
 }) => {
-	console.log(columns, "this columns en datagrid");
-
 	return (
 		<Paper sx={{ height: "80%", width: "100%" }}>
 			<DataGrid

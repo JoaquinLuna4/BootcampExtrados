@@ -17,11 +17,9 @@ import {
 	Paper,
 } from "@mui/material";
 import PasswordInput from "../components/PasswordInput";
-
+import { loginUser } from "../services/userService.js";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useDispatch, useSelector } from "react-redux";
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function LoginForm() {
 	const dispatch = useDispatch();
@@ -29,6 +27,13 @@ function LoginForm() {
 
 	const { error, status } = useSelector((state) => state.auth);
 	const isLoading = status === "loading";
+
+	// Credenciales hardcodeadas para los usuarios demo
+	const demoUsers = {
+		admin: { alias: "elAdmin", enteredPass: "Admin" },
+		organizer: { alias: "pedroOrg", enteredPass: "12345" },
+		juez: { alias: "juez_demo", enteredPass: "12345" },
+	};
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -40,14 +45,12 @@ function LoginForm() {
 			enteredPass: data.get("enteredPass"),
 		};
 
-		const url = `${API_BASE_URL}/auth/login`;
-
 		try {
-			const response = await axios.post(url, values);
+			const response = await loginUser(values);
 			console.log(response, "login exitoso");
-			if (response.data) {
-				dispatch(loginSuccess(response.data));
-				navigate("/users");
+			if (response) {
+				dispatch(loginSuccess(response));
+				navigate("/");
 			} else {
 				dispatch(authError("Error inesperado"));
 			}
@@ -77,7 +80,24 @@ function LoginForm() {
 			dispatch(authError(errorMessage));
 		}
 	};
+	const handleDemoLogin = async (userType) => {
+		const { alias: demoAlias, enteredPass: demoPass } = demoUsers[userType];
 
+		try {
+			const values = { alias: demoAlias, enteredPass: demoPass };
+			// Realizar el login con las credenciales demo
+			const response = await loginUser(values);
+			console.log(response, "login exitoso");
+			if (response) {
+				dispatch(loginSuccess(response));
+				navigate("/");
+			} else {
+				dispatch(authError("Error inesperado"));
+			}
+		} catch (error) {
+			console.error("Error en el login de demostración:", error);
+		}
+	};
 	return (
 		<Container component="main" maxWidth="xs">
 			<CssBaseline />
@@ -130,6 +150,45 @@ function LoginForm() {
 						disabled={isLoading}
 					>
 						{isLoading ? "Iniciando Sesión..." : "Iniciar Sesión"}
+					</Button>
+				</Box>
+				<Typography
+					variant="subtitle2"
+					align="center"
+					sx={{ mt: 2, mb: 1, fontWeight: "bold" }}
+				>
+					Users DEMO:
+				</Typography>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						gap: 1, // Espacio entre los botones
+					}}
+				>
+					<Button
+						fullWidth
+						variant="outlined"
+						onClick={() => handleDemoLogin("admin")}
+						disabled={isLoading}
+					>
+						Login como Admin Demo
+					</Button>
+					<Button
+						fullWidth
+						variant="outlined"
+						onClick={() => handleDemoLogin("organizer")}
+						disabled={isLoading}
+					>
+						Login como Organizador Demo
+					</Button>
+					<Button
+						fullWidth
+						variant="outlined"
+						onClick={() => handleDemoLogin("juez")}
+						disabled={isLoading}
+					>
+						Login como Juez Demo
 					</Button>
 				</Box>
 			</Paper>

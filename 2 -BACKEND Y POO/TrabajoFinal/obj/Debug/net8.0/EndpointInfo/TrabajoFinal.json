@@ -98,6 +98,72 @@
         }
       }
     },
+    "/api/cartas/listar-cartas": {
+      "get": {
+        "tags": [
+          "Carta"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/cartas/details": {
+      "post": {
+        "tags": [
+          "Carta"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestIdList"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestIdList"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestIdList"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/cartas/mazos/{jugadorId}": {
+      "get": {
+        "tags": [
+          "Carta"
+        ],
+        "parameters": [
+          {
+            "name": "jugadorId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/cartas/crear-mazo": {
       "post": {
         "tags": [
@@ -122,6 +188,29 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/cartas/{mazoId}/Cartas": {
+      "get": {
+        "tags": [
+          "Carta"
+        ],
+        "parameters": [
+          {
+            "name": "mazoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -943,7 +1032,7 @@
           }
         }
       },
-      "post": {
+      "put": {
         "tags": [
           "Usuarios"
         ],
@@ -962,17 +1051,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Usuario"
+                "$ref": "#/components/schemas/RequestUpdateUser"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Usuario"
+                "$ref": "#/components/schemas/RequestUpdateUser"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Usuario"
+                "$ref": "#/components/schemas/RequestUpdateUser"
               }
             }
           }
@@ -1217,6 +1306,23 @@
         },
         "additionalProperties": false
       },
+      "RequestIdList": {
+        "required": [
+          "ids"
+        ],
+        "type": "object",
+        "properties": {
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "RequestInscripcionTorneo": {
         "required": [
           "jugadorId",
@@ -1313,6 +1419,35 @@
           "mazoId": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RequestUpdateUser": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "apellido": {
+            "type": "string",
+            "nullable": true
+          },
+          "alias": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "pais": {
+            "type": "string",
+            "nullable": true
+          },
+          "rol": {
+            "$ref": "#/components/schemas/UserRole"
           }
         },
         "additionalProperties": false

@@ -13,21 +13,42 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useTheme } from "@mui/material/styles"; // Importa useTheme
-import { Link as RouterLink } from "react-router";
-import isAuthenticated from "../utils/Authenticated";
+import { useNavigate, Link } from "react-router-dom";
+import useIsAuth from "../utils/hooks/useIsAuth";
+import { useDispatch } from "react-redux";
+import { logout } from "../store/slices/authSlice";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Login"];
+import { TbCards } from "react-icons/tb";
 
-if (isAuthenticated()) {
-	// Si el usuario está autenticado, muestra el botón de Logout
-	settings.push("Logout");
-}
-
+const pages = [
+	{ title: "Home", path: "/" },
+	{ title: "Crear usuario", path: "/create-user" },
+	{ title: "Usuarios", path: "/users" },
+];
+const permanentSettings = [
+	{ title: "Perfil", path: "/" },
+	{ title: "Mis Mazos", path: "/my-decks" },
+];
 function ResponsiveAppBar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
 	const theme = useTheme();
+
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	//Llamo a mi hook personalizado para validar si está autenticado
+	const isAuth = useIsAuth();
+
+	//Logica para manejar login/logout
+	const handleAuthAction = (action) => {
+		if (action === "Login") {
+			navigate("/login");
+		} else if (action === "Logout") {
+			dispatch(logout());
+			navigate("/login");
+		}
+	};
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
@@ -53,10 +74,10 @@ function ResponsiveAppBar() {
 			{/* Usa el color primario del tema */}
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<AdbIcon
+					<TbCards
 						sx={{
 							display: { xs: "none", md: "flex" },
-							mr: 1,
+							mr: 100,
 							color: theme.palette.secondary.main,
 						}}
 					/>{" "}
@@ -76,7 +97,7 @@ function ResponsiveAppBar() {
 							textDecoration: "none",
 						}}
 					>
-						LOGO
+						CARD MANAGER
 					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
 						<IconButton
@@ -106,8 +127,10 @@ function ResponsiveAppBar() {
 							sx={{ display: { xs: "block", md: "none" } }}
 						>
 							{pages.map((page) => (
-								<MenuItem key={page} onClick={handleCloseNavMenu}>
-									<Typography sx={{ textAlign: "center" }}>{page}</Typography>
+								<MenuItem key={page.title} onClick={handleCloseNavMenu}>
+									<Typography sx={{ textAlign: "center" }}>
+										{page.title}
+									</Typography>
 								</MenuItem>
 							))}
 						</Menu>
@@ -115,16 +138,15 @@ function ResponsiveAppBar() {
 					<AdbIcon
 						sx={{
 							display: { xs: "flex", md: "none" },
-							mr: 1,
+							mr: 100,
 							color: theme.palette.primary.main,
 						}}
-					/>{" "}
-					{/* Icono en color secundario */}
+					/>
 					<Typography
 						variant="h5"
 						noWrap
 						component="a"
-						href="#app-bar-with-responsive-menu"
+						onClick={() => navigate("/")}
 						sx={{
 							mr: 2,
 							display: { xs: "flex", md: "none" },
@@ -136,16 +158,19 @@ function ResponsiveAppBar() {
 							textDecoration: "none",
 						}}
 					>
-						LOGO
+						CARD MANAGER
 					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 						{pages.map((page) => (
 							<Button
-								key={page}
-								onClick={handleCloseNavMenu}
+								key={page.title}
+								onClick={() => {
+									handleCloseNavMenu();
+									navigate(page.path);
+								}}
 								sx={{ my: 2, color: "white", display: "block" }}
 							>
-								{page}
+								{page.title}
 							</Button>
 						))}
 					</Box>
@@ -171,18 +196,31 @@ function ResponsiveAppBar() {
 							open={Boolean(anchorElUser)}
 							onClose={handleCloseUserMenu}
 						>
-							{settings.map((setting) => (
+							{permanentSettings.map((setting) => (
 								<MenuItem
-									key={setting}
-									onClick={handleCloseUserMenu}
-									component={RouterLink}
-									to={`/${setting}`}
+									key={setting.title}
+									onClick={() => {
+										handleCloseUserMenu();
+										navigate(setting.path);
+									}}
 								>
 									<Typography sx={{ textAlign: "center" }}>
-										{setting}
+										{setting.title}
 									</Typography>
 								</MenuItem>
 							))}
+							{isAuth ? (
+								<MenuItem
+									key="Logout"
+									onClick={() => handleAuthAction("Logout")}
+								>
+									<Typography sx={{ textAlign: "center" }}>Logout</Typography>
+								</MenuItem>
+							) : (
+								<MenuItem key="Login" onClick={() => handleAuthAction("Login")}>
+									<Typography sx={{ textAlign: "center" }}>Login</Typography>
+								</MenuItem>
+							)}
 						</Menu>
 					</Box>
 				</Toolbar>

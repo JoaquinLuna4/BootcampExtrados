@@ -22,8 +22,8 @@ function FooterMui() {
 			</Typography>
 			<Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
 				Contacto:{" "}
-				<Link color="inherit" href="mailto:tu.correo@ejemplo.com">
-					tu.correo@ejemplo.com
+				<Link color="inherit" href="mailto:joaquinfluna4@gmail.com">
+					joaquinfluna4@gmail.com
 				</Link>
 			</Typography>
 		</Box>

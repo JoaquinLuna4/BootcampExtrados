@@ -1,5 +1,7 @@
 ﻿using LibraryTrabajoFinal.DAOS;
 using LibraryTrabajoFinal.Entidades;
+using LibraryTrabajoFinal.DTOS;
+
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -68,14 +70,49 @@ namespace TrabajoFinal.Servicios
         }
 
 
-        public bool ActualizarUsuario(int id, Usuario usuario)
+        public bool ActualizarUsuario(int Id, RequestUpdateUser usuario)
         {
-            if (usuario == null || usuario.Id != id)
-                throw new ArgumentException("El ID del usuario no coincide o los datos son inválidos.");
+            if (usuario == null)
+            {
 
-            var actualizado = _dao.UpdateUserByID(usuario);
+                throw new ArgumentException("Usuario no valido" + usuario);
+           
+            }
+            else
+            {
+                var usuarioExistente = _dao.GetUserById(Id);
+                if (usuarioExistente == null)
+                {
+                    throw new Exception($"Usuario con ID {Id} no encontrado para actualizar.");
+                }
+
+                // Aplicar los cambios del DTO al objeto existente
+                if (usuario.Nombre != null) usuarioExistente.Nombre = usuario.Nombre;
+                if (usuario.Apellido != null) usuarioExistente.Apellido = usuario.Apellido;
+                if (usuario.Alias != null) usuarioExistente.Alias = usuario.Alias;
+                if (usuario.Email != null) usuarioExistente.Email = usuario.Email;
+                if (usuario.Pais != null) usuarioExistente.Pais = usuario.Pais;
+
+                // --- ¡AQUÍ ESTÁ LA CLAVE DEL ROL! ---
+                if (usuario.Rol.HasValue) // Si el DTO recibió un valor de rol (no nulo)
+                {
+                    usuarioExistente.Rol = usuario.Rol.Value; // Asigna el valor del enum del DTO al objeto de la entidad
+                }
+                // Si usuarioDto.Rol es null, usuarioExistente.Rol mantiene su valor original, lo cual es correcto para updates parciales.
+
+                // --- AÑADE ESTOS LOGS ---
+                string rolDebugString = usuarioExistente.Rol.ToString(); // Obtiene el nombre del enum como string
+                Console.WriteLine($"DEBUG: ID de usuario: {Id}");
+                Console.WriteLine($"DEBUG: Rol recibido en DTO: '{usuario.Rol?.ToString() ?? "NULO"}'");
+                Console.WriteLine($"DEBUG: Rol final en entidad Usuario ANTES de DAO: '{rolDebugString}'");
+                Console.WriteLine($"DEBUG: Longitud del string del Rol: {rolDebugString.Length}");
+                Console.WriteLine($"DEBUG: Valor entero del Rol (para referencia): {(int)usuarioExistente.Rol}");
+                // --- FIN DE LOS LOGS ---
+
+                var actualizado = _dao.UpdateUserByID(usuarioExistente);
             if (!actualizado) throw new Exception("Usuario no encontrado o no se pudo actualizar.");
             return true;
+            }
         }
 
         public bool EliminarUsuario(int id)

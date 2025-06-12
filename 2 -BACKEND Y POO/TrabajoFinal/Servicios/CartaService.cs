@@ -32,13 +32,31 @@ namespace TrabajoFinal.Servicios
            
             return _cartaDAO.CrearCarta(nuevaCarta);
         }
-
+        
+        public IEnumerable<Carta> ListarCartas()
+        {
+            var cartas = _cartaDAO.getAllCards();
+            if (cartas != null && cartas.Any()) return cartas;
+            throw new Exception("No hay usuarios registrados.");
+        }
+        public IEnumerable<Mazo> ObtenerMazoPorId(int id)
+        {
+            var Mazo = _cartaDAO.GetDeckbyUser(id);
+            if (Mazo != null && Mazo.Any()) return Mazo;
+            throw new Exception("No hay mazos registrados con este ID.");
+        }
+      
+        public IEnumerable<Carta> ObtenerCartaPorId(IEnumerable<int> ids)
+        {
+            
+            return _cartaDAO.GetCartasByIds(ids);
+        }
         public int CrearMazo(int jugadorId, string nombre, List<int> cartasIds)
         {
-            if (cartasIds.Count != 15)
-            {
-                throw new CantidadCartasMazoInvalidaException(cartasIds.Count);
-            }
+            //if (cartasIds.Count >= 15)
+            //{
+            //    throw new CantidadCartasMazoInvalidaException(cartasIds.Count);
+            //}
 
             var nuevoMazo = new Mazo
             {
@@ -55,6 +73,12 @@ namespace TrabajoFinal.Servicios
                 throw new CartaNoEncontradaException(cartasIds);
             }
 
+
+        }
+        public IEnumerable<Carta> ObtenerCartasDeMazo(int mazoId)
+        {
+          
+            return _cartaDAO.GetCartasByMazoId(mazoId);
         }
     }
 

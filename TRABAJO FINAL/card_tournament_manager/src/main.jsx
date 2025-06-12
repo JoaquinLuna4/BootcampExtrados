@@ -6,7 +6,7 @@ import "./index.css";
 import App from "./App.jsx";
 import { ThemeProvider } from "@mui/material/styles";
 import { initializeAuth } from "./store/slices/authSlice";
-import { AxiosInterceptor } from "./interceptors/axios.interceptor.jsx";
+import { AxiosInterceptor } from "./services/apiClient.js";
 import lightTheme from "./themes/lightTheme.js";
 
 const container = document.getElementById("root");

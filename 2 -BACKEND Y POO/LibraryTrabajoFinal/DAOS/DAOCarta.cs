@@ -39,7 +39,7 @@ namespace LibraryTrabajoFinal.DAOS
             return count > 0;
         }
 
-        public IEnumerable<Carta> ObtenerCartas()
+        public IEnumerable<Carta> getAllCards()
         {
             using var connection = new MySqlConnection(_connectionString);
             return connection.Query<Carta>("SELECT * FROM Cartas");
@@ -62,6 +62,47 @@ namespace LibraryTrabajoFinal.DAOS
             }
 
             return mazoId;
+        }
+        public IEnumerable<Mazo> GetDeckbyUser(int JugadorId)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+           
+            const string query = "SELECT * FROM Mazos WHERE JugadorId = @JugadorId;";
+
+            return connection.Query<Mazo>(query, new { JugadorId = JugadorId });
+        }
+
+        public IEnumerable<Carta> getCardById(int cardId)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+
+            const string query = "SELECT * FROM Cartas WHERE Id= @cardId;";
+
+            return connection.Query<Carta>(query, new { Id = cardId});
+        }
+        public IEnumerable<Carta> GetCartasByIds(IEnumerable<int> ids)
+        { using var connection = new MySqlConnection(_connectionString);
+        const string query = @"
+                SELECT * FROM Cartas WHERE Id IN @Ids;"; 
+        return connection.Query<Carta>(query, new { Ids = ids });
+        }
+        public IEnumerable<Carta> GetCartasByMazoId(int mazoId)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+            const string query = @"
+                SELECT
+                    c.Id,
+                    c.Nombre,
+                    c.Descripcion,
+                    c.Ilustracion,
+                    c.Ataque,
+                    c.Defensa,
+                    c.Tipo
+                FROM Cartas c
+                INNER JOIN MazosCartas mc ON c.Id = mc.CartaId
+                WHERE mc.MazoId = @MazoId;"; // Unir con la tabla intermedia MazosCartas
+
+            return connection.Query<Carta>(query, new { MazoId = mazoId });
         }
     }
 

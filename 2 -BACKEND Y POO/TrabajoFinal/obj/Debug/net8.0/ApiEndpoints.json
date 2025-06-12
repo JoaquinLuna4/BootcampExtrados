@@ -33,6 +33,22 @@
   },
   {
     "ContainingType": "TrabajoFinal.Controllers.CartaController",
+    "Method": "GetCartasDeMazo",
+    "RelativePath": "api/cartas/{mazoId}/Cartas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mazoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.CartaController",
     "Method": "CrearCarta",
     "RelativePath": "api/cartas/crear",
     "HttpMethod": "POST",
@@ -58,6 +74,48 @@
       {
         "Name": "request",
         "Type": "LibraryTrabajoFinal.DTOS.RequestCrearMazo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.CartaController",
+    "Method": "ObtenerCartaPorId",
+    "RelativePath": "api/cartas/details",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestIdList",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.CartaController",
+    "Method": "ListarCartas",
+    "RelativePath": "api/cartas/listar-cartas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TrabajoFinal.Controllers.CartaController",
+    "Method": "GetMazosByJugadorId",
+    "RelativePath": "api/cartas/mazos/{jugadorId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jugadorId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -469,7 +527,7 @@
     "ContainingType": "TrabajoFinal.Controllers.UsuariosController",
     "Method": "UpdateUser",
     "RelativePath": "api/Usuarios/{id}",
-    "HttpMethod": "POST",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -480,7 +538,7 @@
       },
       {
         "Name": "usuario",
-        "Type": "LibraryTrabajoFinal.Entidades.Usuario",
+        "Type": "LibraryTrabajoFinal.DTOS.RequestUpdateUser",
         "IsRequired": true
       }
     ],

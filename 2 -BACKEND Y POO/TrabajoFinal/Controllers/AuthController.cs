@@ -1,6 +1,8 @@
 ﻿using LibraryTrabajoFinal.DTOS;
+using LibraryTrabajoFinal.Entidades;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using TrabajoFinal.Servicios;
 
 [ApiController]
@@ -19,8 +21,19 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public IActionResult Login([FromBody] CredencialesLogin request)
     {
+        Usuario? usuario = null;
         // Validar credenciales
-        var usuario = _usuariosService.ObtenerUsuario(request.Alias);
+        try
+        {
+         usuario = _usuariosService.ObtenerUsuario(request.Alias);
+        }
+        catch (Exception ex) 
+        {
+            Console.WriteLine($"Error: {ex.Message} , no se encontró el usuario");
+            return Unauthorized(new { Message = "Credenciales inválidas" }); //Devuelvo UnAuth al user final, no la respuesta real
+        }
+
+
         if (usuario == null || !_usuariosService.ValidarPassword(request.EnteredPass, usuario.Password))
         {
             return Unauthorized(new { Message = "Credenciales inválidas" });

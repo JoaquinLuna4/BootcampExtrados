@@ -193,9 +193,9 @@ namespace TrabajoFinal.Controllers
 
 
 
-        // POST: api/usuarios/{id}
-        [HttpPost("{id}")]
-        public IActionResult UpdateUser(int id, [FromBody] Usuario usuario)
+        // PUT: api/usuarios/{id}
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser(int id, [FromBody] RequestUpdateUser usuario)
         {
             try
             {

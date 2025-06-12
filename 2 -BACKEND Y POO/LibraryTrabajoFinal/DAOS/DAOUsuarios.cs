@@ -2,6 +2,7 @@
 using LibraryTrabajoFinal.Entidades;
 using Dapper;
 using System.Data.Common;
+using LibraryTrabajoFinal.DTOS;
 
 
 namespace LibraryTrabajoFinal.DAOS
@@ -27,7 +28,7 @@ namespace LibraryTrabajoFinal.DAOS
         public IEnumerable<Usuario> GetAllUsers()
         {
             using var connection = new MySqlConnection(_connectionString);
-            const string query = "SELECT * FROM USUARIOS ";
+            const string query = "SELECT * FROM USUARIOS WHERE activo = 1 ";
             return connection.Query<Usuario>(query);
         }
 
@@ -73,7 +74,7 @@ namespace LibraryTrabajoFinal.DAOS
         
 
 
-        public bool UpdateUserByID(Usuario user)
+        public bool UpdateUserByID(Usuario user )
         {
             using var connection = new MySqlConnection(_connectionString);
             const string query = @"
@@ -84,11 +85,27 @@ namespace LibraryTrabajoFinal.DAOS
             Alias = @Alias,
             Email = @Email,
             Pais = @Pais,
-            Rol = @Rol,
-            FechaRegistro = @FechaRegistro
+            Rol = @RolString,
+            FechaRegistro = @FechaRegistro,
             id_creador = @IdCreador
             WHERE Id = @Id";
-            return connection.Execute(query, user) > 0;
+
+            var parameters = new
+            {
+                user.Id, 
+                user.Nombre,
+                user.Apellido,
+                user.Alias,
+                user.Email,
+                user.Password,
+                user.Pais,
+                RolString = Enum.GetName(typeof(UserRole), user.Rol),  //  Conversión a string para MySQL ENUM
+                user.Fecha_Registro,
+                user.IdCreador
+            };
+
+
+            return connection.Execute(query, parameters) > 0;
         }
         public bool DeleteUserByID(int id)
         {

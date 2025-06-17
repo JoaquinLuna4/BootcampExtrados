@@ -8,7 +8,7 @@ export const GridTable = ({
 	sx,
 }) => {
 	return (
-		<Paper sx={{ height: "80%", width: "100%" }}>
+		<Paper sx={{ height: "80%" }}>
 			<DataGrid
 				rows={rows}
 				columns={columns}

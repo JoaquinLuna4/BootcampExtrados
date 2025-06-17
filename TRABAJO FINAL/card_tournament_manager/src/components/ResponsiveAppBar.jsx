@@ -25,7 +25,7 @@ const pages = [
 	{ title: "Usuarios", path: "/users" },
 ];
 const permanentSettings = [
-	{ title: "Perfil", path: "/" },
+	{ title: "Perfil", path: "/profile" },
 	{ title: "Mis Mazos", path: "/my-decks" },
 ];
 function ResponsiveAppBar() {

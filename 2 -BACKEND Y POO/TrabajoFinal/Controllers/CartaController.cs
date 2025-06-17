@@ -98,7 +98,7 @@ namespace TrabajoFinal.Controllers
             }
 
         }
-        [HttpGet("{mazoId}/Cartas")] // Ruta: GET api/Mazos/{mazoId}/Cartas
+        [HttpGet("{mazoId}/Cartas")] // Ruta: GET api/Cartas/{mazoId}/Cartas
         public IActionResult GetCartasDeMazo(int mazoId)
         {
             try

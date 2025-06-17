@@ -90,17 +90,15 @@ namespace LibraryTrabajoFinal.DAOS
         {
             using var connection = new MySqlConnection(_connectionString);
             const string query = @"
-                SELECT
-                    c.Id,
-                    c.Nombre,
-                    c.Descripcion,
-                    c.Ilustracion,
-                    c.Ataque,
-                    c.Defensa,
-                    c.Tipo
-                FROM Cartas c
-                INNER JOIN MazosCartas mc ON c.Id = mc.CartaId
-                WHERE mc.MazoId = @MazoId;"; // Unir con la tabla intermedia MazosCartas
+               SELECT
+                c.Id,
+                c.Nombre,  
+                c.Ilustracion,
+                c.Ataque,
+                c.Defensa  
+            FROM Cartas c
+            INNER JOIN MazosCartas mc ON c.Id = mc.CartaId
+            WHERE mc.MazoId =@mazoId";
 
             return connection.Query<Carta>(query, new { MazoId = mazoId });
         }

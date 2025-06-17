@@ -22,7 +22,7 @@ export const UserTable = ({
 		{ field: "id", headerName: "ID", width: 90 },
 		{ field: "alias", headerName: "Alias", width: 150 },
 		{ field: "nombre", headerName: "Nombre", width: 150 },
-		{ field: "email", headerName: "Email", width: 250 },
+		// { field: "email", headerName: "Email", width: 250 },
 		// { field: "rol", headerName: "Rol", width: 150 },
 		{ field: "pais", headerName: "País", width: 150 },
 		{

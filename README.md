@@ -36,7 +36,7 @@ Este proyecto consiste en un **Sistema de Administración de Torneos Online de J
 Puedes explorar los detalles de este proyecto en sus respectivos `README.md`:
 
 - **Backend del Trabajo Final**: [Ver README del Backend](./2%20-BACKEND%20Y%20POO/TrabajoFinal/README.md)
-- **Frontend del Trabajo Final**: [Ver README del Frontend](./3%-FRONTEND/README.md)
+- **Frontend del Trabajo Final**: [Ver README del Frontend](./3-FRONTEND/README.md)
 
 ---
 

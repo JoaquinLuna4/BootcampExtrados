@@ -15,7 +15,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { LuSwords } from "react-icons/lu";
 import { LuShield } from "react-icons/lu";
 
-export default function CardItem({ card, isSelected, onSelect }) {
+export default function CardItem({ card, isSelected, onSelect, selectAction }) {
 	const handleToggleSelect = () => {
 		onSelect(card.id, !isSelected); // Notifica al padre el ID de la carta y el nuevo estado de selección
 	};
@@ -25,16 +25,18 @@ export default function CardItem({ card, isSelected, onSelect }) {
 			<Card key={card.id} sx={{ maxWidth: 345 }}>
 				<CardActionArea>
 					<CardActions sx={{ justifyContent: "space-between" }}>
-						{/* <Button size="small" color="primary">
-						Ver Detalles
-					</Button> */}
-						<FormControlLabel
-							control={
-								<Checkbox checked={isSelected} onChange={handleToggleSelect} />
-							}
-							label="Seleccionar"
-							labelPlacement="end"
-						/>
+						{selectAction ? (
+							<FormControlLabel
+								control={
+									<Checkbox
+										checked={isSelected}
+										onChange={handleToggleSelect}
+									/>
+								}
+								label="Seleccionar"
+								labelPlacement="end"
+							/>
+						) : null}
 					</CardActions>
 					<CardMedia
 						component="img"

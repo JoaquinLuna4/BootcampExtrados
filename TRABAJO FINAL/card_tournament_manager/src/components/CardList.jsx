@@ -17,9 +17,9 @@ export default function CardListItem({ cards, isSelected, onSelect }) {
 				/>
 			),
 		},
-		{ field: "nombre", headerName: "Nombre de la carta", width: 500 },
-		{ field: "ataque", headerName: "Ataque", width: 500 },
-		{ field: "defensa", headerName: "Defensa", width: 500 },
+		{ field: "nombre", headerName: "Nombre de la carta", flex: 1 },
+		{ field: "ataque", headerName: "Ataque", flex: 1 },
+		{ field: "defensa", headerName: "Defensa", flex: 1 },
 	];
 	//Mapeo las cartas para añadir isSelected necesario para renderCell
 	const rowsWithSelectionState = cards.map((card) => ({

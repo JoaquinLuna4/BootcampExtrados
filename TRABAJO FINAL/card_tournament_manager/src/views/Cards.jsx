@@ -156,11 +156,13 @@ const Cards = () => {
 						container
 						spacing={{ xs: 2, md: 3 }}
 						columns={{ xs: 4, sm: 8, md: 12 }}
+						justifyContent={"center"}
 					>
 						{cards.map((card) => (
 							<Grid sx={{ xs: 4, sm: 4, md: 3 }} key={card.id}>
 								<CardItem
 									card={card}
+									selectAction={true}
 									isSelected={selectedCardIds.includes(card.id)}
 									onSelect={handleCardSelection}
 								/>

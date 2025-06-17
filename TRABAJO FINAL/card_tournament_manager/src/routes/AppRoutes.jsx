@@ -18,11 +18,23 @@ function AppRoutes() {
 			<Route element={<Layout />}>
 				<Route path="/" element={<Home />} />
 				<Route path="/users" element={<ProtectedRoute element={<Users />} />} />
-				<Route path="/create-user" element={<CreateUser />} />
-				<Route path="/cards" element={<Cards />} />
-				<Route path="/selected-cards" element={<CardAsign />} />
-				<Route path="/my-decks" element={<MyDecks />} />
-				<Route path="/profile" element={<Profile />} />
+				<Route
+					path="/create-user"
+					element={<ProtectedRoute element={<CreateUser />} />}
+				/>
+				<Route path="/cards" element={<ProtectedRoute element={<Cards />} />} />
+				<Route
+					path="/selected-cards"
+					element={<ProtectedRoute element={<CardAsign />} />}
+				/>
+				<Route
+					path="/my-decks"
+					element={<ProtectedRoute element={<MyDecks />} />}
+				/>
+				<Route
+					path="/profile"
+					element={<ProtectedRoute element={<Profile />} />}
+				/>
 			</Route>
 			<Route path="/success" element={<Success />} />
 			<Route path="/login" element={<Login />} />

@@ -14,6 +14,7 @@ import TextField from "@mui/material/TextField";
 import { getCardDetailsByIds } from "../services/cardsService";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
+import CardItem from "../components/CardItem";
 
 export const CardAsign = () => {
 	const location = useLocation();
@@ -163,31 +164,20 @@ export const CardAsign = () => {
 			{detailedSelectedCards.length === 0 ? (
 				<Typography>No has seleccionado ninguna carta.</Typography>
 			) : (
-				<Grid container spacing={2}>
-					{detailedSelectedCards.map((card) => (
-						<Grid item xs={12} sm={6} md={4} key={card.id}>
-							<Card>
-								<CardMedia
-									component="img"
-									height="140"
-									image={card.ilustracion}
-									alt={card.nombre}
-								/>
-								<CardContent>
-									<Typography gutterBottom variant="h5" component="div">
-										{card.nombre}
-									</Typography>
-									<Typography variant="body2" color="text.secondary">
-										{card.descripcion}
-									</Typography>
-								</CardContent>
-								<CardActions>
-									{/* Puedes añadir botones de detalles o quitar cartas aquí */}
-								</CardActions>
-							</Card>
-						</Grid>
-					))}
-				</Grid>
+				<>
+					<Grid
+						container
+						spacing={{ xs: 2, md: 3 }}
+						columns={{ xs: 4, sm: 8, md: 12 }}
+						justifyContent={"center"}
+					>
+						{detailedSelectedCards.map((card) => (
+							<Grid sx={{ xs: 4, sm: 4, md: 3 }} key={card.id}>
+								<CardItem card={card} />
+							</Grid>
+						))}
+					</Grid>
+				</>
 			)}
 		</Box>
 	);

@@ -19,12 +19,12 @@ export const UserTable = ({
 	console.log(rowsInTable);
 
 	const columns = [
-		{ field: "id", headerName: "ID", width: 90 },
-		{ field: "alias", headerName: "Alias", width: 150 },
-		{ field: "nombre", headerName: "Nombre", width: 150 },
-		// { field: "email", headerName: "Email", width: 250 },
-		// { field: "rol", headerName: "Rol", width: 150 },
-		{ field: "pais", headerName: "País", width: 150 },
+		{ field: "id", headerName: "ID", flex: 0.2 },
+		{ field: "alias", headerName: "Alias", flex: 1 },
+		{ field: "nombre", headerName: "Nombre", flex: 1 },
+		{ field: "email", headerName: "Email", flex: 1.6 },
+		// { field: "rol", headerName: "Rol", flex: 1 },
+		{ field: "pais", headerName: "País", flex: 1 },
 		{
 			field: "actions",
 			headerName: "Acciones",

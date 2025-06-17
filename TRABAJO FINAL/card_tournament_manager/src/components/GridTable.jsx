@@ -14,7 +14,10 @@ export const GridTable = ({
 				columns={columns}
 				initialState={{ pagination: { paginationModel } }}
 				pageSizeOptions={pageSizeOptions}
-				sx={{ border: 0, ...sx }}
+				sx={{
+					border: 0,
+					...sx,
+				}}
 				//checkboxSelection //no loimplementé finalmente, lo hice aparte
 			/>
 		</Paper>

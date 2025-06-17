@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/slices/authSlice";
 import { Typography } from "@mui/material";
 import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+
 import { getUsers } from "../services/userService";
 
 import { deleteUser } from "../services/userService";
@@ -14,6 +16,8 @@ import { ConfirmDialog } from "../components/ConfirmDialog";
 import { EditUserDialog } from "../components/EditUserDialog";
 
 import { UserTable } from "../components/UserTable";
+import { SnackbarItem } from "../components/SnackbarItem";
+import ErrorItem from "../components/ErrorItem";
 
 export const Users = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -93,7 +97,7 @@ export const Users = () => {
 		if (userIdToDelete) {
 			try {
 				await deleteUser(userIdToDelete, token);
-
+				showSnackbar("Usuario eliminado con éxito.", "success"); // Seteo los estados del snackbar
 				setUsers((prevUsers) =>
 					prevUsers.filter((u) => u.id !== userIdToDelete)
 				); //Actualizo la lista de usuarios que estoy mostrando
@@ -108,6 +112,7 @@ export const Users = () => {
 							error.message ||
 							"Error desconocido.")
 				);
+				showSnackbar("Error al eliminar usuario.", "error");
 			}
 		}
 	};
@@ -144,7 +149,7 @@ export const Users = () => {
 		try {
 			// Asegúrate de que tu servicio 'updateUser' reciba el ID y los datos
 			await updateUser(updatedUserData.id, dataToSend); // Pasa el ID y el DTO completo
-
+			showSnackbar("Usuario modificado con éxito.", "success");
 			// Actualiza el estado 'users' para reflejar los cambios en la tabla
 			setUsers((prevUsers) =>
 				prevUsers.map((u) =>
@@ -161,6 +166,7 @@ export const Users = () => {
 						error.message ||
 						"Error desconocido.")
 			);
+			showSnackbar("Error al modificar usuario.", "error");
 		} finally {
 			setIsSavingEdit(false);
 		}
@@ -171,19 +177,46 @@ export const Users = () => {
 		setUserToEdit(null); // Limpia el usuario en edición al cerrar
 		setSaveEditError(null); // Limpia errores si el usuario cierra el diálogo
 	};
+
+	// --- estados para el Snackbar ---
+	const [snackbarOpen, setSnackbarOpen] = useState(false);
+	const [snackbarMessage, setSnackbarMessage] = useState("");
+	const [snackbarSeverity, setSnackbarSeverity] = useState("success"); // 'success', 'error', 'info', 'warning'
+
+	// --- Funciones para mostrar y cerrar el Snackbar ---
+	const showSnackbar = (message, severity = "success") => {
+		setSnackbarMessage(message);
+		setSnackbarSeverity(severity);
+		setSnackbarOpen(true);
+	};
+
+	const handleSnackbarClose = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+		setSnackbarOpen(false);
+	};
+
 	return (
 		<div>
 			{isLoading ? (
-				<Typography variant="h6">Loading ... </Typography>
+				<Typography variant="h3">Loading ... </Typography>
 			) : error ? (
-				<div>
-					<Typography color="error">{error}</Typography>
-				</div>
+				<Container>
+					<ErrorItem error={error} />
+					<SnackbarItem
+						open={snackbarOpen}
+						message={snackbarMessage}
+						severity={snackbarSeverity}
+						onClose={handleSnackbarClose}
+					/>
+				</Container>
 			) : (
 				<Container>
 					<Typography variant="h4" sx={{ mb: 3, mt: 3 }}>
 						Gestión de Usuarios
 					</Typography>
+					<SnackbarItem />
 					<UserTable
 						rows={rows}
 						isLoading={isLoading}
@@ -209,6 +242,12 @@ export const Users = () => {
 							saveError={saveEditError}
 						/>
 					)}
+					<SnackbarItem
+						open={snackbarOpen}
+						message={snackbarMessage}
+						severity={snackbarSeverity}
+						onClose={handleSnackbarClose}
+					/>
 				</Container>
 			)}
 		</div>

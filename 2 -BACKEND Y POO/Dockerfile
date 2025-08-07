@@ -2,10 +2,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copia los archivos de proyecto y de la solución primero
+# Copia los archivos de proyecto y de la solución
 # Esto permite que Docker use el caché de capas para la restauración
 COPY ["TrabajoFinal/TrabajoFinal.csproj", "TrabajoFinal/"]
 COPY ["LibraryTrabajoFinal/LibraryTrabajoFinal.csproj", "LibraryTrabajoFinal/"]
+COPY ["Configuracion/Configuracion.csproj", "Configuracion/"] # Añadimos el proyecto Configuracion
 COPY ["ExtradosBackend.sln", "."]
 
 # Restaura las dependencias de la solución
